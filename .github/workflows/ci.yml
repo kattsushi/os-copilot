@@ -1,0 +1,149 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+      - dev
+  push:
+    branches:
+      - master
+      - dev
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10.32.1"
+
+jobs:
+  lint-format:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run oxlint
+        run: pnpm exec oxlint
+
+      - name: Check formatting
+        run: pnpm exec dprint check
+
+  typecheck:
+    name: Typecheck affected projects
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Compute affected base
+        id: affected
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "base=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=$(git merge-base HEAD origin/${{ github.ref_name }})" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Typecheck affected projects
+        run: pnpm nx affected --target=typecheck --base=${{ steps.affected.outputs.base }} --head=HEAD
+
+  build:
+    name: Build affected projects
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Compute affected base
+        id: affected
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "base=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=$(git merge-base HEAD origin/${{ github.ref_name }})" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build affected projects
+        run: pnpm nx affected --target=build --base=${{ steps.affected.outputs.base }} --head=HEAD
+
+  ci-summary:
+    name: CI summary
+    runs-on: ubuntu-latest
+    needs:
+      - lint-format
+      - typecheck
+      - build
+    if: always()
+    steps:
+      - name: Write summary
+        run: |
+          {
+            echo "## CI Summary"
+            echo
+            echo "| Job | Result |"
+            echo "| --- | --- |"
+            echo "| Lint and format | ${{ needs.lint-format.result }} |"
+            echo "| Typecheck | ${{ needs.typecheck.result }} |"
+            echo "| Build | ${{ needs.build.result }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail on unsuccessful dependency
+        if: needs.lint-format.result != 'success' || needs.typecheck.result != 'success' || needs.build.result != 'success'
+        run: exit 1

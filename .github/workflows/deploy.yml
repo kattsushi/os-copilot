@@ -1,0 +1,89 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage to deploy"
+        required: true
+        type: choice
+        options:
+          - prod
+          - qa
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}-${{ inputs.stage || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10.32.1"
+
+jobs:
+  deploy:
+    name: Deploy Cloudflare stage
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.stage || (github.ref_name == 'master' && 'prod' || 'qa') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve stage
+        id: stage
+        shell: bash
+        run: |
+          if [[ -n "${{ inputs.stage }}" ]]; then
+            echo "name=${{ inputs.stage }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.ref_name }}" == "master" ]]; then
+            echo "name=prod" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=qa" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Typecheck web
+        run: pnpm nx typecheck web --skip-nx-cache
+
+      - name: Build web
+        run: pnpm nx build web --skip-nx-cache
+
+      - name: Deploy stage
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          OS_COPILOT_PROD_DOMAIN: ${{ vars.OS_COPILOT_PROD_DOMAIN }}
+          OS_COPILOT_QA_DOMAIN: ${{ vars.OS_COPILOT_QA_DOMAIN }}
+          BETTER_AUTH_URL: ${{ vars.BETTER_AUTH_URL }}
+        run: pnpm nx deploy web -- --stage=${{ steps.stage.outputs.name }}
+
+      - name: Add summary
+        run: |
+          {
+            echo "## Deploy"
+            echo
+            echo "Stage: \`${{ steps.stage.outputs.name }}\`"
+            echo "Branch: \`${{ github.ref_name }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

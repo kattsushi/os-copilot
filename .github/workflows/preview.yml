@@ -1,0 +1,113 @@
+name: Preview Deploy
+
+on:
+  pull_request:
+    branches:
+      - master
+      - dev
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.base_ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10.32.1"
+  PREVIEW_STAGE: pr-${{ github.event.pull_request.number }}-${{ github.base_ref }}
+
+jobs:
+  deploy-preview:
+    name: Deploy preview
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck web
+        run: pnpm nx typecheck web --skip-nx-cache
+
+      - name: Build web
+        run: pnpm nx build web --skip-nx-cache
+
+      - name: Deploy preview stage
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          BETTER_AUTH_URL: ${{ vars.BETTER_AUTH_URL }}
+        run: pnpm nx deploy web -- --stage=${{ env.PREVIEW_STAGE }}
+
+      - name: Add summary
+        run: |
+          {
+            echo "## Preview Deploy"
+            echo
+            echo "Stage: \`${{ env.PREVIEW_STAGE }}\`"
+            echo "Base branch: \`${{ github.base_ref }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  destroy-preview:
+    name: Destroy preview
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Destroy preview stage
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: pnpm nx destroy web -- --stage=${{ env.PREVIEW_STAGE }}
+
+      - name: Add summary
+        run: |
+          {
+            echo "## Preview Destroy"
+            echo
+            echo "Stage: \`${{ env.PREVIEW_STAGE }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
