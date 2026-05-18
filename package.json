@@ -1,0 +1,47 @@
+{
+  "name": "os-copilot",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "scripts": {
+    "dev": "nx dev web",
+    "build": "nx build web",
+    "preview": "nx preview web",
+    "start": "nx start web",
+    "lint": "pnpm exec oxlint && pnpm exec dprint check",
+    "lint:fix": "pnpm exec oxlint --fix && pnpm exec dprint fmt",
+    "lint:affected": "nx affected --target=lint",
+    "lint-staged": "lint-staged --allow-empty",
+    "typecheck": "nx typecheck web",
+    "build:affected": "nx affected --target=build",
+    "test:affected": "nx affected --target=test",
+    "typecheck:affected": "nx affected --target=typecheck",
+    "tsgo:patch": "effect-tsgo patch",
+    "prepare": "husky && effect-tsgo patch",
+    "nx": "nx"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm exec oxlint --fix",
+      "pnpm exec dprint fmt --allow-no-files"
+    ],
+    "*.{json,jsonc,css,scss,md,mdx}": [
+      "pnpm exec dprint fmt --allow-no-files"
+    ]
+  },
+  "devDependencies": {
+    "@effect/language-service": "catalog:",
+    "@effect/tsgo": "catalog:",
+    "@nx/js": "catalog:",
+    "@nx/vite": "catalog:",
+    "@typescript/native-preview": "catalog:",
+    "dprint": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "nx": "catalog:",
+    "nx-oxlint": "catalog:",
+    "oxlint": "catalog:",
+    "typescript": "catalog:"
+  }
+}

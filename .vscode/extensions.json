@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "dprint.dprint",
+    "effectful-tech.effect-vscode",
+    "nrwl.angular-console",
+    "oxc.oxc-vscode"
+  ]
+}

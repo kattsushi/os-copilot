@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.nx/
+.alchemy/
+.output/
+dist/
+apps/*/.alchemy/
+apps/*/.output/
+apps/*/.tanstack/tmp/
+apps/*/.wrangler/
+apps/*/dist/
+apps/*/node_modules
+
+# Local Pi runtime state
+.pi/
+.atl/
+.pi-lens/
+repos/
+.output/
+
+.env.local
+.env

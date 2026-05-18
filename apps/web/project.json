@@ -1,0 +1,59 @@
+{
+  "name": "web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/web/src",
+  "targets": {
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm start"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm typecheck"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm test"
+      }
+    },
+    "lint": {
+      "executor": "nx-oxlint:lint",
+      "options": {
+        "configFile": ".oxlintrc.json",
+        "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx,mts,cts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm run deploy --yes"
+      }
+    },
+    "destroy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm run destroy --yes"
+      }
+    },
+    "cf-dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "command": "pnpm run cf-dev"
+      }
+    }
+  },
+  "tags": ["scope:web", "type:app"]
+}

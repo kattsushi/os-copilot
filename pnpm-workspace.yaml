@@ -1,0 +1,70 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - "@earendil-works/pi-coding-agent"
+  - "@juicesharp/rpiv-ask-user-question"
+  - "@juicesharp/rpiv-todo"
+  - gentle-engram
+  - gentle-pi
+  - pi-btw
+  - pi-intercom
+  - pi-lens
+  - pi-mcp-adapter
+  - pi-subagents
+  - pi-web-access
+  - alchemy
+  - "@alchemy.run/node-utils"
+  - "@distilled.cloud/aws"
+  - "@distilled.cloud/axiom"
+  - "@distilled.cloud/cloudflare"
+  - "@distilled.cloud/cloudflare-runtime"
+  - "@distilled.cloud/cloudflare-rolldown-plugin"
+  - "@distilled.cloud/cloudflare-vite-plugin"
+  - "@distilled.cloud/core"
+  - "@distilled.cloud/neon"
+  - "@tanstack/solid-router"
+  - "@tanstack/solid-router-devtools"
+  - "@tanstack/solid-start"
+  - "@tanstack/solid-start-client"
+  - "@tanstack/solid-start-server"
+  - "@tanstack/start-client-core"
+  - "@tanstack/start-fn-stubs"
+  - "@tanstack/start-plugin-core"
+  - "@tanstack/start-server-core"
+  - "@tanstack/start-storage-context"
+  - "@tanstack/history"
+  - "@tanstack/router-core"
+  - "@tanstack/router-devtools-core"
+  - "@tanstack/router-generator"
+  - "@tanstack/router-plugin"
+  - "@tanstack/router-utils"
+  - "@tanstack/virtual-file-routes"
+
+catalog:
+  "@effect/language-service": 0.86.1
+  "@effect/platform-node": 4.0.0-beta.66
+  "@effect/tsgo": 0.7.0
+  "@nx/js": 22.7.1
+  "@nx/vite": 22.7.1
+  "@tanstack/solid-router": 1.170.4
+  "@tanstack/solid-router-devtools": 1.167.0
+  "@tanstack/solid-start": 1.168.6
+  "@typescript/native-preview": 7.0.0-dev.20260513.1
+  "@cloudflare/workers-types": 4.20260511.1
+  better-auth: 1.6.11
+  dprint: 0.54.0
+  alchemy: 2.0.0-beta.40
+  effect: 4.0.0-beta.66
+  husky: 9.1.7
+  lint-staged: 17.0.4
+  nx: 22.7.1
+  nx-oxlint: 0.1.1
+  oxlint: 1.64.0
+  solid-js: 1.9.12
+  typescript: 5.9.3
+  vite: 8.0.12
+  vite-plugin-solid: 2.11.12
+  vitest: 4.1.6

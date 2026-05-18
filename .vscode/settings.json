@@ -1,0 +1,32 @@
+{
+  "editor.defaultFormatter": "dprint.dprint",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/out": true,
+    "**/coverage": true,
+    "**/logs": true,
+    "**/tmp": true,
+    "**/.tanstack": true,
+    "**/.nx": true,
+    "**/.husky": true,
+  },
+  "editor.codeActionsOnSave": {
+    "quickfix.oxc": "explicit",
+    "source.organizeImports.oxc": "explicit",
+    "source.fixAll.oxc": "explicit"
+  },
+  "[javascript][typescript][javascriptreact][typescriptreact][json][jsonc][css][scss][markdown]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "typescript.native-preview.tsdk": "node_modules/@typescript/native-preview",
+  "js/ts.experimental.useTsgo": true
+}

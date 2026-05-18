@@ -1,0 +1,33 @@
+{
+  "name": "@os-copilot/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node dist/server/server.js",
+    "typecheck": "tsgo --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "deploy": "alchemy deploy alchemy.run.ts",
+    "destroy": "alchemy destroy alchemy.run.ts",
+    "cf-dev": "set -a; [ ! -f .env ] || . ./.env; set +a; alchemy dev alchemy.run.ts"
+  },
+  "dependencies": {
+    "alchemy": "catalog:",
+    "@effect/platform-node": "catalog:",
+    "effect": "catalog:",
+    "@tanstack/solid-router": "catalog:",
+    "@tanstack/solid-router-devtools": "catalog:",
+    "@tanstack/solid-start": "catalog:",
+    "better-auth": "catalog:",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:",
+    "vitest": "catalog:"
+  }
+}
