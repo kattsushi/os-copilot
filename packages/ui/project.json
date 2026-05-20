@@ -25,6 +25,20 @@
         "command": "pnpm test"
       }
     },
+    "storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm storybook"
+      }
+    },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm build-storybook"
+      }
+    },
     "lint": {
       "executor": "nx-oxlint:lint",
       "options": {

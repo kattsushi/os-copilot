@@ -15,6 +15,10 @@
       "types": "./src/components/ui/button.tsx",
       "import": "./src/components/ui/button.tsx"
     },
+    "./chart": {
+      "types": "./src/components/ui/chart.tsx",
+      "import": "./src/components/ui/chart.tsx"
+    },
     "./styles.css": "./src/styles.css",
     "./components/ui/*": {
       "types": "./src/components/ui/*.tsx",
@@ -41,24 +45,34 @@
   "scripts": {
     "build": "vite build && tsgo -p tsconfig.lib.json",
     "typecheck": "tsgo --noEmit -p tsconfig.json",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "peerDependencies": {
     "solid-js": "catalog:"
   },
   "devDependencies": {
     "@effect/tsgo": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "jsdom": "catalog:",
     "solid-js": "catalog:",
+    "storybook": "catalog:",
+    "storybook-solidjs-vite": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-solid": "catalog:",
     "vitest": "catalog:"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "catalog:",
     "@kobalte/core": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
+    "echarts": "catalog:",
+    "lucide-solid": "catalog:",
     "tailwind-merge": "catalog:",
-    "tailwindcss": "catalog:"
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:"
   }
 }

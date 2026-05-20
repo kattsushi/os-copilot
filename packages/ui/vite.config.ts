@@ -1,5 +1,24 @@
+import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "vite"
 import viteSolid from "vite-plugin-solid"
+
+const externalPackages = [
+  "@fontsource-variable/inter",
+  "@kobalte/core",
+  "class-variance-authority",
+  "clsx",
+  "echarts",
+  "lucide-solid",
+  "solid-js",
+  "tailwind-merge",
+  "tailwindcss",
+]
+
+function isExternalPackage(id: string): boolean {
+  return externalPackages.some(
+    (dependency) => id === dependency || id.startsWith(`${dependency}/`),
+  )
+}
 
 export default defineConfig({
   build: {
@@ -9,11 +28,11 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["solid-js", "solid-js/web", "solid-js/store"],
+      external: isExternalPackage,
     },
   },
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [viteSolid()],
+  plugins: [tailwindcss(), viteSolid()],
 })
