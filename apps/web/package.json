@@ -22,12 +22,18 @@
     "@tanstack/solid-router-devtools": "catalog:",
     "@tanstack/solid-start": "catalog:",
     "better-auth": "catalog:",
-    "solid-js": "catalog:"
+    "solid-js": "catalog:",
+    "@os-copilot/ui": "workspace:*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "catalog:",
     "vite": "catalog:",
     "vite-plugin-solid": "catalog:",
     "vitest": "catalog:"
+  },
+  "imports": {
+    "#components/*": "./src/components/*.tsx",
+    "#lib/*": "./src/lib/*.ts",
+    "#hooks/*": "./src/hooks/*.ts"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "nx-mcp": {
+      "command": "pnpm",
+      "args": [
+        "exec",
+        "nx",
+        "mcp"
+      ],
+      "lifecycle": "lazy",
+      "directTools": true
+    }
+  }
+}
