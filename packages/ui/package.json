@@ -55,6 +55,14 @@
       "types": "./src/components/ui/copy-id-button.tsx",
       "import": "./src/components/ui/copy-id-button.tsx"
     },
+    "./data-table": {
+      "types": "./src/components/ui/data-table.tsx",
+      "import": "./src/components/ui/data-table.tsx"
+    },
+    "./data-table-filters": {
+      "types": "./src/components/ui/data-table-filters.tsx",
+      "import": "./src/components/ui/data-table-filters.tsx"
+    },
     "./dialog": {
       "types": "./src/components/ui/dialog.tsx",
       "import": "./src/components/ui/dialog.tsx"
@@ -187,6 +195,7 @@
   "dependencies": {
     "@fontsource-variable/inter": "catalog:",
     "@kobalte/core": "catalog:",
+    "@tanstack/solid-table": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "echarts": "catalog:",

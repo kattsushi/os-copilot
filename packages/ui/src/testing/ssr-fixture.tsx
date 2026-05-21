@@ -3,6 +3,8 @@ import { renderToString } from "solid-js/web"
 import { Button } from "../components/ui/button"
 import { Center } from "../components/ui/center"
 import { CopyIdButton } from "../components/ui/copy-id-button"
+import { DataTable } from "../components/ui/data-table"
+import { DataTableFilters } from "../components/ui/data-table-filters"
 import { GridPattern } from "../components/ui/grid-pattern"
 import { Marquee } from "../components/ui/marquee"
 import { Toaster } from "../components/ui/toast"
@@ -36,4 +38,33 @@ export function renderMarqueeFixture() {
 
 export function renderToastFixture() {
   return renderToString(() => <Toaster />)
+}
+
+export function renderDataTableFixture() {
+  return renderToString(() => (
+    <DataTable
+      columns={[
+        { accessorKey: "name", header: "Name" },
+        { accessorKey: "role", header: "Role" },
+      ]}
+      data={[{ name: "Ada Lovelace", role: "Engineer" }]}
+      getMobileTitle={(row) => row.name}
+    />
+  ))
+}
+
+export function renderDataTableFiltersFixture() {
+  return renderToString(() => (
+    <DataTableFilters
+      filters={[
+        {
+          id: "name",
+          label: "Name",
+          value: "Ada",
+          onValueChange: () => {},
+          placeholder: "Search by name",
+        },
+      ]}
+    />
+  ))
 }

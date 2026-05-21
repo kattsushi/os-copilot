@@ -5,11 +5,13 @@ import viteSolid from "vite-plugin-solid"
 const externalPackages = [
   "@fontsource-variable/inter",
   "@kobalte/core",
+  "@tanstack/solid-table",
   "class-variance-authority",
   "clsx",
   "echarts",
   "lucide-solid",
   "solid-js",
+  "solid-sonner",
   "tailwind-merge",
   "tailwindcss",
 ]
