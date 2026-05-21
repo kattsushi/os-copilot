@@ -11,13 +11,121 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts"
     },
+    "./alert-dialog": {
+      "types": "./src/components/ui/alert-dialog.tsx",
+      "import": "./src/components/ui/alert-dialog.tsx"
+    },
+    "./avatar": {
+      "types": "./src/components/ui/avatar.tsx",
+      "import": "./src/components/ui/avatar.tsx"
+    },
+    "./badge": {
+      "types": "./src/components/ui/badge.tsx",
+      "import": "./src/components/ui/badge.tsx"
+    },
     "./button": {
       "types": "./src/components/ui/button.tsx",
       "import": "./src/components/ui/button.tsx"
     },
+    "./card": {
+      "types": "./src/components/ui/card.tsx",
+      "import": "./src/components/ui/card.tsx"
+    },
+    "./center": {
+      "types": "./src/components/ui/center.tsx",
+      "import": "./src/components/ui/center.tsx"
+    },
     "./chart": {
       "types": "./src/components/ui/chart.tsx",
       "import": "./src/components/ui/chart.tsx"
+    },
+    "./checkbox": {
+      "types": "./src/components/ui/checkbox.tsx",
+      "import": "./src/components/ui/checkbox.tsx"
+    },
+    "./collapsible": {
+      "types": "./src/components/ui/collapsible.tsx",
+      "import": "./src/components/ui/collapsible.tsx"
+    },
+    "./combobox": {
+      "types": "./src/components/ui/combobox.tsx",
+      "import": "./src/components/ui/combobox.tsx"
+    },
+    "./dialog": {
+      "types": "./src/components/ui/dialog.tsx",
+      "import": "./src/components/ui/dialog.tsx"
+    },
+    "./dropdown-menu": {
+      "types": "./src/components/ui/dropdown-menu.tsx",
+      "import": "./src/components/ui/dropdown-menu.tsx"
+    },
+    "./empty": {
+      "types": "./src/components/ui/empty.tsx",
+      "import": "./src/components/ui/empty.tsx"
+    },
+    "./float": {
+      "types": "./src/components/ui/float.tsx",
+      "import": "./src/components/ui/float.tsx"
+    },
+    "./grid": {
+      "types": "./src/components/ui/grid.tsx",
+      "import": "./src/components/ui/grid.tsx"
+    },
+    "./grid-pattern": {
+      "types": "./src/components/ui/grid-pattern.tsx",
+      "import": "./src/components/ui/grid-pattern.tsx"
+    },
+    "./input": {
+      "types": "./src/components/ui/input.tsx",
+      "import": "./src/components/ui/input.tsx"
+    },
+    "./input-group": {
+      "types": "./src/components/ui/input-group.tsx",
+      "import": "./src/components/ui/input-group.tsx"
+    },
+    "./label": {
+      "types": "./src/components/ui/label.tsx",
+      "import": "./src/components/ui/label.tsx"
+    },
+    "./pagination": {
+      "types": "./src/components/ui/pagination.tsx",
+      "import": "./src/components/ui/pagination.tsx"
+    },
+    "./select": {
+      "types": "./src/components/ui/select.tsx",
+      "import": "./src/components/ui/select.tsx"
+    },
+    "./separator": {
+      "types": "./src/components/ui/separator.tsx",
+      "import": "./src/components/ui/separator.tsx"
+    },
+    "./sheet": {
+      "types": "./src/components/ui/sheet.tsx",
+      "import": "./src/components/ui/sheet.tsx"
+    },
+    "./sidebar": {
+      "types": "./src/components/ui/sidebar.tsx",
+      "import": "./src/components/ui/sidebar.tsx"
+    },
+    "./stack": {
+      "types": "./src/components/ui/stack.tsx",
+      "import": "./src/components/ui/stack.tsx"
+    },
+    "./skeleton": {
+      "types": "./src/components/ui/skeleton.tsx",
+      "import": "./src/components/ui/skeleton.tsx"
+    },
+    "./table": {
+      "types": "./src/components/ui/table.tsx",
+      "import": "./src/components/ui/table.tsx"
+    },
+    "./textarea": {
+      "types": "./src/components/ui/textarea.tsx",
+      "import": "./src/components/ui/textarea.tsx"
+    },
+    "./tooltip": {
+      "types": "./src/components/ui/tooltip.tsx",
+      "import": "./src/components/ui/tooltip.tsx"
     },
     "./styles.css": "./src/styles.css",
     "./components/ui/*": {

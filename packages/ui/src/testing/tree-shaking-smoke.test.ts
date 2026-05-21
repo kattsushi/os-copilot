@@ -10,6 +10,38 @@ import { GridPattern as SourceRoutedGridPattern } from "@os-copilot/ui/component
 import { Stack as SourceRoutedStack } from "@os-copilot/ui/components/ui/stack"
 import { cn as SourceRoutedCn } from "@os-copilot/ui/lib/utils"
 
+const publicComponentSubpathImports = {
+  "alert-dialog": () => import("@os-copilot/ui/alert-dialog"),
+  avatar: () => import("@os-copilot/ui/avatar"),
+  badge: () => import("@os-copilot/ui/badge"),
+  button: () => import("@os-copilot/ui/button"),
+  card: () => import("@os-copilot/ui/card"),
+  center: () => import("@os-copilot/ui/center"),
+  chart: () => import("@os-copilot/ui/chart"),
+  checkbox: () => import("@os-copilot/ui/checkbox"),
+  collapsible: () => import("@os-copilot/ui/collapsible"),
+  combobox: () => import("@os-copilot/ui/combobox"),
+  dialog: () => import("@os-copilot/ui/dialog"),
+  "dropdown-menu": () => import("@os-copilot/ui/dropdown-menu"),
+  empty: () => import("@os-copilot/ui/empty"),
+  float: () => import("@os-copilot/ui/float"),
+  grid: () => import("@os-copilot/ui/grid"),
+  "grid-pattern": () => import("@os-copilot/ui/grid-pattern"),
+  input: () => import("@os-copilot/ui/input"),
+  "input-group": () => import("@os-copilot/ui/input-group"),
+  label: () => import("@os-copilot/ui/label"),
+  pagination: () => import("@os-copilot/ui/pagination"),
+  select: () => import("@os-copilot/ui/select"),
+  separator: () => import("@os-copilot/ui/separator"),
+  sheet: () => import("@os-copilot/ui/sheet"),
+  sidebar: () => import("@os-copilot/ui/sidebar"),
+  stack: () => import("@os-copilot/ui/stack"),
+  skeleton: () => import("@os-copilot/ui/skeleton"),
+  table: () => import("@os-copilot/ui/table"),
+  textarea: () => import("@os-copilot/ui/textarea"),
+  tooltip: () => import("@os-copilot/ui/tooltip"),
+} as const
+
 describe("ui package public exports", () => {
   it("resolves root, ergonomic subpath, shadcn source-routed, and css exports", async () => {
     await expect(import("@os-copilot/ui/styles.css")).resolves.toBeDefined()
@@ -23,5 +55,15 @@ describe("ui package public exports", () => {
     expect(Stack).toBe(SourceRoutedStack)
     expect(cn("a", false, "b")).toBe("a b")
     expect(SourceRoutedCn("a", undefined, "b")).toBe("a b")
+  })
+
+  it("resolves every public component ergonomic subpath", async () => {
+    await Promise.all(
+      Object.entries(publicComponentSubpathImports).map(
+        async ([subpath, load]) => {
+          await expect(load(), subpath).resolves.toBeDefined()
+        },
+      ),
+    )
   })
 })
