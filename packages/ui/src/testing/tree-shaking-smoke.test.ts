@@ -1,6 +1,17 @@
 import { describe, expect, it } from "vitest"
 
-import { Button as RootButton, Center, cn, Float, Grid, GridPattern, Stack } from "@os-copilot/ui"
+import {
+  Button as RootButton,
+  Center,
+  cn,
+  CopyIdButton,
+  Float,
+  Grid,
+  GridPattern,
+  Marquee,
+  Stack,
+  ToastProvider,
+} from "@os-copilot/ui"
 import { Button as SubpathButton } from "@os-copilot/ui/button"
 import { Button as SourceRoutedButton } from "@os-copilot/ui/components/ui/button"
 import { Center as SourceRoutedCenter } from "@os-copilot/ui/components/ui/center"
@@ -21,6 +32,7 @@ const publicComponentSubpathImports = {
   checkbox: () => import("@os-copilot/ui/checkbox"),
   collapsible: () => import("@os-copilot/ui/collapsible"),
   combobox: () => import("@os-copilot/ui/combobox"),
+  "copy-id-button": () => import("@os-copilot/ui/copy-id-button"),
   dialog: () => import("@os-copilot/ui/dialog"),
   "dropdown-menu": () => import("@os-copilot/ui/dropdown-menu"),
   empty: () => import("@os-copilot/ui/empty"),
@@ -30,6 +42,7 @@ const publicComponentSubpathImports = {
   input: () => import("@os-copilot/ui/input"),
   "input-group": () => import("@os-copilot/ui/input-group"),
   label: () => import("@os-copilot/ui/label"),
+  marquee: () => import("@os-copilot/ui/marquee"),
   pagination: () => import("@os-copilot/ui/pagination"),
   select: () => import("@os-copilot/ui/select"),
   separator: () => import("@os-copilot/ui/separator"),
@@ -39,6 +52,7 @@ const publicComponentSubpathImports = {
   skeleton: () => import("@os-copilot/ui/skeleton"),
   table: () => import("@os-copilot/ui/table"),
   textarea: () => import("@os-copilot/ui/textarea"),
+  toast: () => import("@os-copilot/ui/toast"),
   tooltip: () => import("@os-copilot/ui/tooltip"),
 } as const
 
@@ -53,6 +67,9 @@ describe("ui package public exports", () => {
     expect(Grid).toBe(SourceRoutedGrid)
     expect(GridPattern).toBe(SourceRoutedGridPattern)
     expect(Stack).toBe(SourceRoutedStack)
+    expect(CopyIdButton).toBeDefined()
+    expect(Marquee).toBeDefined()
+    expect(ToastProvider).toBeDefined()
     expect(cn("a", false, "b")).toBe("a b")
     expect(SourceRoutedCn("a", undefined, "b")).toBe("a b")
   })

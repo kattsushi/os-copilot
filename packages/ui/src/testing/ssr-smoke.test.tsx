@@ -8,7 +8,10 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest"
 type SsrFixture = {
   renderButtonFixture: () => string
   renderCenterFixture: () => string
+  renderCopyIdButtonFixture: () => string
   renderGridPatternFixture: () => string
+  renderMarqueeFixture: () => string
+  renderToastFixture: () => string
 }
 
 const testDir = path.dirname(fileURLToPath(import.meta.url))
@@ -52,5 +55,15 @@ describe("SSR smoke coverage", () => {
 
     expect(html).toContain('data-slot="grid-pattern"')
     expect(html).toContain('aria-hidden="true"')
+  })
+
+  it("renders interaction utilities on the server", () => {
+    expect(fixture.renderCopyIdButtonFixture()).toContain(
+      'data-slot="copy-id-button"',
+    )
+    expect(fixture.renderMarqueeFixture()).toContain('data-slot="marquee"')
+    expect(fixture.renderToastFixture()).toContain(
+      'data-slot="toast-viewport"',
+    )
   })
 })
