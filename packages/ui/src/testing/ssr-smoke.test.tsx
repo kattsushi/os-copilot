@@ -9,6 +9,8 @@ type SsrFixture = {
   renderButtonFixture: () => string
   renderCenterFixture: () => string
   renderCopyIdButtonFixture: () => string
+  renderDataTableFixture: () => string
+  renderDataTableFiltersFixture: () => string
   renderGridPatternFixture: () => string
   renderMarqueeFixture: () => string
   renderToastFixture: () => string
@@ -55,6 +57,17 @@ describe("SSR smoke coverage", () => {
 
     expect(html).toContain('data-slot="grid-pattern"')
     expect(html).toContain('aria-hidden="true"')
+  })
+
+  it("renders data table utilities on the server", () => {
+    expect(fixture.renderDataTableFixture()).toContain(
+      'data-slot="data-table"',
+    )
+    expect(fixture.renderDataTableFixture()).toContain("Ada Lovelace")
+    expect(fixture.renderDataTableFiltersFixture()).toContain(
+      'data-slot="data-table-filters"',
+    )
+    expect(fixture.renderDataTableFiltersFixture()).toContain("Search by name")
   })
 
   it("renders interaction utilities on the server", () => {

@@ -5,6 +5,8 @@ import {
   Button,
   Center,
   CopyIdButton,
+  DataTable,
+  DataTableFilters,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -38,6 +40,41 @@ describe("SPA smoke coverage", () => {
     expect(host.querySelector('[data-slot="button"]')?.textContent).toBe(
       "Continue",
     )
+    dispose()
+  })
+
+  it("mounts data table utilities in jsdom", () => {
+    const host = document.createElement("div")
+    document.body.append(host)
+    const dispose = render(
+      () => (
+        <div>
+          <DataTableFilters
+            filters={[
+              {
+                id: "name",
+                label: "Name",
+                value: "Ada",
+                onValueChange: () => {},
+              },
+            ]}
+          />
+          <DataTable
+            columns={[{ accessorKey: "name", header: "Name" }]}
+            data={[{ name: "Ada Lovelace" }]}
+            getMobileTitle={(row) => row.name}
+          />
+        </div>
+      ),
+      host,
+    )
+
+    expect(
+      host.querySelector('[data-slot="data-table-filters"]')?.textContent,
+    ).toContain("Name")
+    expect(
+      host.querySelector('[data-slot="data-table"]')?.textContent,
+    ).toContain("Ada Lovelace")
     dispose()
   })
 

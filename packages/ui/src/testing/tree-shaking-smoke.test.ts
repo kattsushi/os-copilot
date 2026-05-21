@@ -5,6 +5,8 @@ import {
   Center,
   cn,
   CopyIdButton,
+  DataTable,
+  DataTableFilters,
   Float,
   Grid,
   GridPattern,
@@ -34,6 +36,8 @@ const publicComponentSubpathImports = {
   collapsible: () => import("@os-copilot/ui/collapsible"),
   combobox: () => import("@os-copilot/ui/combobox"),
   "copy-id-button": () => import("@os-copilot/ui/copy-id-button"),
+  "data-table": () => import("@os-copilot/ui/data-table"),
+  "data-table-filters": () => import("@os-copilot/ui/data-table-filters"),
   dialog: () => import("@os-copilot/ui/dialog"),
   "dropdown-menu": () => import("@os-copilot/ui/dropdown-menu"),
   empty: () => import("@os-copilot/ui/empty"),
@@ -69,6 +73,8 @@ describe("ui package public exports", () => {
     expect(GridPattern).toBe(SourceRoutedGridPattern)
     expect(Stack).toBe(SourceRoutedStack)
     expect(CopyIdButton).toBeDefined()
+    expect(DataTable).toBeDefined()
+    expect(DataTableFilters).toBeDefined()
     expect(Marquee).toBeDefined()
     expect(Toaster).toBeDefined()
     expect(toast).toBeDefined()
