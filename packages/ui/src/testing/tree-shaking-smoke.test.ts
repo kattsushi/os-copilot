@@ -59,9 +59,11 @@ describe("ui package public exports", () => {
 
   it("resolves every public component ergonomic subpath", async () => {
     await Promise.all(
-      Object.entries(publicComponentSubpathImports).map(async ([subpath, load]) => {
-        await expect(load(), subpath).resolves.toBeDefined()
-      }),
+      Object.entries(publicComponentSubpathImports).map(
+        async ([subpath, load]) => {
+          await expect(load(), subpath).resolves.toBeDefined()
+        },
+      ),
     )
   })
 })
