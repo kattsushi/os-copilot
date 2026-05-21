@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "#components/ui/button"
-import { createToastStore, ToastProvider, ToastViewport } from "#components/ui/toast"
+import { toast, Toaster } from "#components/ui/toast"
 
 const meta = {
   title: "UI/Toast",
@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Lightweight local Solid toast provider/API. This slice intentionally avoids Sonner so the adapter can be swapped later without adding a dependency now.",
+          "Zaidan Sonner toast wrapper for Solid. Use `Toaster` once near the app root and call `toast.*` from event handlers.",
       },
     },
   },
@@ -19,41 +19,32 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const LocalProvider: Story = {
-  render: () => {
-    const store = createToastStore()
-
-    return (
-      <ToastProvider store={store}>
-        <div class="flex flex-col gap-3 rounded-lg border p-4">
-          <p class="text-sm text-muted-foreground">
-            Toasts render in an accessible live region without a portal or browser globals during SSR.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <Button
-              onClick={() =>
-                store.toast({
-                  title: "Saved",
-                  description: "The local toast store announced this update.",
-                })}
-            >
-              Show toast
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() =>
-                store.toast({
-                  title: "Could not save",
-                  description: "Try again from a stable connection.",
-                  variant: "destructive",
-                })}
-            >
-              Show error
-            </Button>
-          </div>
-        </div>
-        <ToastViewport />
-      </ToastProvider>
-    )
-  },
+export const SonnerToast: Story = {
+  render: () => (
+    <div class="flex flex-col gap-3 rounded-lg border p-4">
+      <p class="text-sm text-muted-foreground">
+        Toasts render through the Zaidan Sonner wrapper and inherit UI tokens.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <Button
+          onClick={() =>
+            toast.success("Saved", {
+              description: "The Sonner toast announced this update.",
+            })}
+        >
+          Show success
+        </Button>
+        <Button
+          variant="destructive"
+          onClick={() =>
+            toast.error("Could not save", {
+              description: "Try again from a stable connection.",
+            })}
+        >
+          Show error
+        </Button>
+      </div>
+      <Toaster />
+    </div>
+  ),
 }

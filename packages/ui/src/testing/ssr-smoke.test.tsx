@@ -62,8 +62,6 @@ describe("SSR smoke coverage", () => {
       'data-slot="copy-id-button"',
     )
     expect(fixture.renderMarqueeFixture()).toContain('data-slot="marquee"')
-    expect(fixture.renderToastFixture()).toContain(
-      'data-slot="toast-viewport"',
-    )
+    expect(fixture.renderToastFixture()).toContain("Notifications")
   })
 })

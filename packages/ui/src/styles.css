@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "solid-sonner/styles.css";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
 @import "./styles/base.css";

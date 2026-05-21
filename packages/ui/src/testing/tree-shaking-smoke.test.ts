@@ -10,7 +10,8 @@ import {
   GridPattern,
   Marquee,
   Stack,
-  ToastProvider,
+  toast,
+  Toaster,
 } from "@os-copilot/ui"
 import { Button as SubpathButton } from "@os-copilot/ui/button"
 import { Button as SourceRoutedButton } from "@os-copilot/ui/components/ui/button"
@@ -69,7 +70,8 @@ describe("ui package public exports", () => {
     expect(Stack).toBe(SourceRoutedStack)
     expect(CopyIdButton).toBeDefined()
     expect(Marquee).toBeDefined()
-    expect(ToastProvider).toBeDefined()
+    expect(Toaster).toBeDefined()
+    expect(toast).toBeDefined()
     expect(cn("a", false, "b")).toBe("a b")
     expect(SourceRoutedCn("a", undefined, "b")).toBe("a b")
   })

@@ -5,7 +5,7 @@ import { Center } from "../components/ui/center"
 import { CopyIdButton } from "../components/ui/copy-id-button"
 import { GridPattern } from "../components/ui/grid-pattern"
 import { Marquee } from "../components/ui/marquee"
-import { createToastStore, ToastProvider, ToastViewport } from "../components/ui/toast"
+import { Toaster } from "../components/ui/toast"
 
 export function renderCenterFixture() {
   return renderToString(() => <Center>Layout content</Center>, {
@@ -35,12 +35,5 @@ export function renderMarqueeFixture() {
 }
 
 export function renderToastFixture() {
-  const store = createToastStore()
-  store.toast({ title: "Saved", description: "Server-rendered notification" })
-
-  return renderToString(() => (
-    <ToastProvider store={store}>
-      <ToastViewport />
-    </ToastProvider>
-  ))
+  return renderToString(() => <Toaster />)
 }

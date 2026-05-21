@@ -5,17 +5,17 @@ import {
   Button,
   Center,
   CopyIdButton,
-  createToastStore,
   Dialog,
   DialogContent,
   DialogTitle,
   Marquee,
-  ToastProvider,
-  ToastViewport,
+  toast,
+  Toaster,
 } from "@os-copilot/ui"
 
 afterEach(() => {
   document.body.replaceChildren()
+  toast.dismiss()
 })
 
 describe("SPA smoke coverage", () => {
@@ -44,21 +44,21 @@ describe("SPA smoke coverage", () => {
   it("mounts interaction utilities in jsdom", () => {
     const host = document.createElement("div")
     document.body.append(host)
-    const store = createToastStore()
-    store.toast({ title: "Mounted toast" })
     const dispose = render(
       () => (
-        <ToastProvider store={store}>
+        <>
           <CopyIdButton value="user_123">Copy</CopyIdButton>
           <Marquee>
             <span>Motion</span>
             <span>Motion</span>
           </Marquee>
-          <ToastViewport />
-        </ToastProvider>
+          <Toaster />
+        </>
       ),
       host,
     )
+
+    toast.success("Mounted toast")
 
     expect(
       host.querySelector('[data-slot="copy-id-button"]')?.textContent,
@@ -66,9 +66,7 @@ describe("SPA smoke coverage", () => {
     expect(host.querySelector('[data-slot="marquee"]')?.textContent).toContain(
       "Motion",
     )
-    expect(
-      host.querySelector('[data-slot="toast-viewport"]')?.textContent,
-    ).toContain("Mounted toast")
+    expect(document.body.textContent).toContain("Mounted toast")
     dispose()
   })
 
