@@ -1,10 +1,21 @@
 import { render } from "solid-js/web"
 import { afterEach, describe, expect, it } from "vitest"
 
-import { Button, Center, Dialog, DialogContent, DialogTitle } from "@os-copilot/ui"
+import {
+  Button,
+  Center,
+  CopyIdButton,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Marquee,
+  toast,
+  Toaster,
+} from "@os-copilot/ui"
 
 afterEach(() => {
   document.body.replaceChildren()
+  toast.dismiss()
 })
 
 describe("SPA smoke coverage", () => {
@@ -27,6 +38,35 @@ describe("SPA smoke coverage", () => {
     expect(host.querySelector('[data-slot="button"]')?.textContent).toBe(
       "Continue",
     )
+    dispose()
+  })
+
+  it("mounts interaction utilities in jsdom", () => {
+    const host = document.createElement("div")
+    document.body.append(host)
+    const dispose = render(
+      () => (
+        <>
+          <CopyIdButton value="user_123">Copy</CopyIdButton>
+          <Marquee>
+            <span>Motion</span>
+            <span>Motion</span>
+          </Marquee>
+          <Toaster />
+        </>
+      ),
+      host,
+    )
+
+    toast.success("Mounted toast")
+
+    expect(
+      host.querySelector('[data-slot="copy-id-button"]')?.textContent,
+    ).toContain("Copy")
+    expect(host.querySelector('[data-slot="marquee"]')?.textContent).toContain(
+      "Motion",
+    )
+    expect(document.body.textContent).toContain("Mounted toast")
     dispose()
   })
 
