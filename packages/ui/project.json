@@ -1,0 +1,52 @@
+{
+  "name": "ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/ui/src",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm build"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm typecheck"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm test"
+      }
+    },
+    "storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm storybook"
+      }
+    },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/ui",
+        "command": "pnpm build-storybook"
+      }
+    },
+    "lint": {
+      "executor": "nx-oxlint:lint",
+      "options": {
+        "configFile": ".oxlintrc.json",
+        "lintFilePatterns": ["packages/ui/**/*.{ts,tsx,js,jsx,mts,cts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": ["scope:ui", "type:lib"]
+}

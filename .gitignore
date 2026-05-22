@@ -12,6 +12,8 @@ apps/*/.tanstack/tmp/
 apps/*/.wrangler/
 apps/*/dist/
 apps/*/node_modules
+packages/*/storybook-static/
+storybook-static/
 
 # Local Pi runtime state
 .pi/
