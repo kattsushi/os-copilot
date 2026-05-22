@@ -71,7 +71,9 @@ describe("SPA smoke coverage", () => {
       host,
     )
 
-    const input = host.querySelector<HTMLInputElement>("#data-table-filter-name")
+    const input = host.querySelector<HTMLInputElement>(
+      "#data-table-filter-name",
+    )
     input?.focus()
     input!.value = "Ada L"
     input!.dispatchEvent(new InputEvent("input", { bubbles: true }))
