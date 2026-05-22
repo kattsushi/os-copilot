@@ -12,22 +12,28 @@ import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import { Check, ChevronsUpDown, X } from "lucide-solid"
 import type { ComponentProps, JSX, ValidComponent } from "solid-js"
 import { mergeProps, Show, splitProps } from "solid-js"
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "#components/ui/input-group"
 import { cn } from "#lib/utils"
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "#components/ui/input-group"
 
 // ============================================================================
 // Combobox Root
 // ============================================================================
 
-type ComboboxProps<O, OptGroup = never, T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    ComboboxRootProps<O, OptGroup, T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
+type ComboboxProps<
+  O,
+  OptGroup = never,
+  T extends ValidComponent = "div",
+> = PolymorphicProps<T, ComboboxRootProps<O, OptGroup, T>> &
+  Pick<ComponentProps<T>, "class" | "children">
 
 const Combobox = <O, OptGroup = never, T extends ValidComponent = "div">(
-  props: ComboboxProps<O, OptGroup, T>,
+  props: ComboboxProps<O, OptGroup, T>
 ) => {
   const mergedProps = mergeProps(
     {
@@ -37,7 +43,7 @@ const Combobox = <O, OptGroup = never, T extends ValidComponent = "div">(
       defaultFilter: "contains",
       triggerMode: "input",
     } as ComboboxProps<O>,
-    props,
+    props
   )
   return <ComboboxPrimitive.Root {...mergedProps} />
 }
@@ -46,14 +52,15 @@ const Combobox = <O, OptGroup = never, T extends ValidComponent = "div">(
 // Combobox Control
 // ============================================================================
 
-type ComboboxControlProps<T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveControlProps<T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
+type ComboboxControlProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  ComboboxPrimitiveControlProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children">
 
-const ComboboxControl = <T extends ValidComponent = "div">(props: ComboboxControlProps<T>) => {
+const ComboboxControl = <T extends ValidComponent = "div">(
+  props: ComboboxControlProps<T>
+) => {
   const [local, others] = splitProps(props as ComboboxControlProps, ["class"])
   return (
     <ComboboxPrimitive.Control
@@ -68,19 +75,22 @@ const ComboboxControl = <T extends ValidComponent = "div">(props: ComboboxContro
 // Combobox Input
 // ============================================================================
 
-type ComboboxInputProps<T extends ValidComponent = "input"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveInputProps<T>
-  >
-  & Pick<ComponentProps<"input">, "class" | "placeholder" | "disabled" | "id" | "name">
-  & {
+type ComboboxInputProps<T extends ValidComponent = "input"> = PolymorphicProps<
+  T,
+  ComboboxPrimitiveInputProps<T>
+> &
+  Pick<
+    ComponentProps<"input">,
+    "class" | "placeholder" | "disabled" | "id" | "name"
+  > & {
     showTrigger?: boolean
     showClear?: boolean
     children?: JSX.Element
   }
 
-const ComboboxInput = <T extends ValidComponent = "input">(rawProps: ComboboxInputProps<T>) => {
+const ComboboxInput = <T extends ValidComponent = "input">(
+  rawProps: ComboboxInputProps<T>
+) => {
   const props = mergeProps({ showTrigger: true, showClear: false }, rawProps)
   const [local, others] = splitProps(props as ComboboxInputProps, [
     "class",
@@ -145,27 +155,27 @@ const ComboboxInput = <T extends ValidComponent = "input">(rawProps: ComboboxInp
 // ============================================================================
 
 type ComboboxTriggerProps<T extends ValidComponent = "button"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveTriggerProps<T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
-  & {
-    size?: "sm" | "default"
-  }
+  PolymorphicProps<T, ComboboxPrimitiveTriggerProps<T>> &
+    Pick<ComponentProps<T>, "class" | "children"> & {
+      size?: "sm" | "default"
+    }
 
 const ComboboxTrigger = <T extends ValidComponent = "button">(
-  rawProps: ComboboxTriggerProps<T>,
+  rawProps: ComboboxTriggerProps<T>
 ) => {
   const props = mergeProps({ size: "default" }, rawProps)
-  const [local, others] = splitProps(props as ComboboxTriggerProps, ["class", "children", "size"])
+  const [local, others] = splitProps(props as ComboboxTriggerProps, [
+    "class",
+    "children",
+    "size",
+  ])
 
   return (
     <ComboboxPrimitive.Control>
       <ComboboxPrimitive.Trigger
         class={cn(
           "z-combobox-trigger z-select-trigger flex w-fit items-center justify-between whitespace-nowrap outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=combobox-value]:line-clamp-1 *:data-[slot=combobox-value]:flex *:data-[slot=combobox-value]:items-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
-          local.class,
+          local.class
         )}
         data-size={local.size}
         data-slot="combobox-trigger"
@@ -185,21 +195,22 @@ const ComboboxTrigger = <T extends ValidComponent = "button">(
 // Combobox Content
 // ============================================================================
 
-type ComboboxContentProps<T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveContentProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
+type ComboboxContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  ComboboxPrimitiveContentProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const ComboboxContent = <T extends ValidComponent = "div">(props: ComboboxContentProps<T>) => {
+const ComboboxContent = <T extends ValidComponent = "div">(
+  props: ComboboxContentProps<T>
+) => {
   const [local, others] = splitProps(props as ComboboxContentProps, ["class"])
   return (
     <ComboboxPrimitive.Portal>
       <ComboboxPrimitive.Content
         class={cn(
           "relative isolate z-50 z-combobox-content z-menu-target max-h-(--kb-popper-available-height) min-w-32 origin-(--kb-combobox-content-transform-origin) overflow-y-auto overflow-x-hidden",
-          local.class,
+          local.class
         )}
         data-slot="combobox-content"
         {...others}
@@ -214,14 +225,15 @@ const ComboboxContent = <T extends ValidComponent = "div">(props: ComboboxConten
 // Combobox Section (Group)
 // ============================================================================
 
-type ComboboxSectionProps<T extends ValidComponent = "li"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveSectionProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
+type ComboboxSectionProps<T extends ValidComponent = "li"> = PolymorphicProps<
+  T,
+  ComboboxPrimitiveSectionProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const ComboboxSection = <T extends ValidComponent = "li">(props: ComboboxSectionProps<T>) => {
+const ComboboxSection = <T extends ValidComponent = "li">(
+  props: ComboboxSectionProps<T>
+) => {
   const [local, others] = splitProps(props as ComboboxSectionProps, ["class"])
   return (
     <ComboboxPrimitive.Section
@@ -255,23 +267,26 @@ const ComboboxSectionLabel = (props: ComboboxSectionLabelProps) => {
 // Combobox Item
 // ============================================================================
 
-type ComboboxItemProps<T extends ValidComponent = "li"> =
-  & PolymorphicProps<
-    T,
-    ComboboxPrimitiveItemProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
-  & {
+type ComboboxItemProps<T extends ValidComponent = "li"> = PolymorphicProps<
+  T,
+  ComboboxPrimitiveItemProps<T>
+> &
+  Pick<ComponentProps<T>, "class"> & {
     children?: JSX.Element
   }
 
-const ComboboxItem = <T extends ValidComponent = "li">(props: ComboboxItemProps<T>) => {
-  const [local, others] = splitProps(props as ComboboxItemProps, ["class", "children"])
+const ComboboxItem = <T extends ValidComponent = "li">(
+  props: ComboboxItemProps<T>
+) => {
+  const [local, others] = splitProps(props as ComboboxItemProps, [
+    "class",
+    "children",
+  ])
   return (
     <ComboboxPrimitive.Item
       class={cn(
         "relative z-combobox-item z-select-item flex w-full cursor-default select-none items-center outline-hidden data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        local.class,
+        local.class
       )}
       data-slot="combobox-item"
       {...others}
@@ -312,17 +327,21 @@ const ComboboxEmpty = (props: ComboboxEmptyProps) => {
 // Combobox Separator
 // ============================================================================
 
-type ComboboxSeparatorProps<T extends ValidComponent = "hr"> = ComponentProps<T> & {
-  class?: string
-}
+type ComboboxSeparatorProps<T extends ValidComponent = "hr"> =
+  ComponentProps<T> & {
+    class?: string
+  }
 
 const ComboboxSeparator = <T extends ValidComponent = "hr">(
-  props: PolymorphicProps<T, ComboboxSeparatorProps<T>>,
+  props: PolymorphicProps<T, ComboboxSeparatorProps<T>>
 ) => {
   const [local, others] = splitProps(props as ComboboxSeparatorProps, ["class"])
   return (
     <hr
-      class={cn("pointer-events-none z-combobox-separator z-select-separator", local.class)}
+      class={cn(
+        "pointer-events-none z-combobox-separator z-select-separator",
+        local.class
+      )}
       data-slot="combobox-separator"
       {...others}
     />

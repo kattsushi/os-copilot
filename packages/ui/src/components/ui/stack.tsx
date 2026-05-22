@@ -37,7 +37,7 @@ const Stack = (props: StackProps) => {
         "flex w-full flex-col",
         stackGap[local.gap ?? "md"],
         stackAlign[local.align ?? "stretch"],
-        local.class,
+        local.class
       )}
       {...others}
     />

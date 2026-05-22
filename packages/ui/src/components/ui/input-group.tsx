@@ -1,10 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority"
 import { type ComponentProps, type JSX, splitProps } from "solid-js"
 
-import { cn } from "#lib/utils"
 import { Button, type ButtonProps } from "#components/ui/button"
 import { Input } from "#components/ui/input"
 import { Textarea } from "#components/ui/textarea"
+import { cn } from "#lib/utils"
 
 type InputGroupProps = ComponentProps<"div">
 
@@ -17,7 +17,7 @@ const InputGroup = (props: InputGroupProps) => {
       role="group"
       class={cn(
         "group/input-group relative z-input-group flex w-full min-w-0 items-center outline-none has-[>textarea]:h-auto",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -31,17 +31,20 @@ const inputGroupAddonVariants = cva(
       align: {
         "inline-start": "z-input-group-addon-align-inline-start order-first",
         "inline-end": "z-input-group-addon-align-inline-end order-last",
-        "block-start": "z-input-group-addon-align-block-start order-first w-full justify-start",
-        "block-end": "z-input-group-addon-align-block-end order-last w-full justify-start",
+        "block-start":
+          "z-input-group-addon-align-block-start order-first w-full justify-start",
+        "block-end":
+          "z-input-group-addon-align-block-end order-last w-full justify-start",
       },
     },
     defaultVariants: {
       align: "inline-start",
     },
-  },
+  }
 )
 
-type InputGroupAddonProps = ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>
+type InputGroupAddonProps = ComponentProps<"div"> &
+  VariantProps<typeof inputGroupAddonVariants>
 
 const InputGroupAddon = (props: InputGroupAddonProps) => {
   const [local, others] = splitProps(props, ["class", "align", "onClick"])
@@ -71,29 +74,35 @@ const InputGroupAddon = (props: InputGroupAddonProps) => {
   )
 }
 
-const inputGroupButtonVariants = cva("z-input-group-button flex items-center shadow-none", {
-  variants: {
-    size: {
-      xs: "z-input-group-button-size-xs",
-      sm: "z-input-group-button-size-sm",
-      "icon-xs": "z-input-group-button-size-icon-xs",
-      "icon-sm": "z-input-group-button-size-icon-sm",
+const inputGroupButtonVariants = cva(
+  "z-input-group-button flex items-center shadow-none",
+  {
+    variants: {
+      size: {
+        xs: "z-input-group-button-size-xs",
+        sm: "z-input-group-button-size-sm",
+        "icon-xs": "z-input-group-button-size-icon-xs",
+        "icon-sm": "z-input-group-button-size-icon-sm",
+      },
     },
-  },
-  defaultVariants: {
-    size: "xs",
-  },
-})
+    defaultVariants: {
+      size: "xs",
+    },
+  }
+)
 
-type InputGroupButtonProps =
-  & Omit<ButtonProps, "size">
-  & VariantProps<typeof inputGroupButtonVariants>
-  & {
+type InputGroupButtonProps = Omit<ButtonProps, "size"> &
+  VariantProps<typeof inputGroupButtonVariants> & {
     type?: "button" | "submit" | "reset"
   }
 
 const InputGroupButton = (props: InputGroupButtonProps) => {
-  const [local, others] = splitProps(props, ["class", "type", "variant", "size"])
+  const [local, others] = splitProps(props, [
+    "class",
+    "type",
+    "variant",
+    "size",
+  ])
   const size = () => local.size ?? "xs"
   const variant = () => local.variant ?? "ghost"
   const type = () => local.type ?? "button"
@@ -115,7 +124,10 @@ const InputGroupText = (props: InputGroupTextProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <span
-      class={cn("z-input-group-text flex items-center [&_svg]:pointer-events-none", local.class)}
+      class={cn(
+        "z-input-group-text flex items-center [&_svg]:pointer-events-none",
+        local.class
+      )}
       {...others}
     />
   )

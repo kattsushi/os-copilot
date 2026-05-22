@@ -13,7 +13,7 @@ const Center = (props: CenterProps) => {
       data-slot="center"
       class={cn(
         "mx-auto flex w-full max-w-screen-sm items-center justify-center",
-        local.class,
+        local.class
       )}
       {...others}
     />

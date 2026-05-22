@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "#components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "#components/ui/card"
 
 const meta = { title: "UI/Card", component: Card } satisfies Meta<typeof Card>
 export default meta

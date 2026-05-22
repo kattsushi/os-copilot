@@ -30,7 +30,8 @@ export const SonnerToast: Story = {
           onClick={() =>
             toast.success("Saved", {
               description: "The Sonner toast announced this update.",
-            })}
+            })
+          }
         >
           Show success
         </Button>
@@ -39,7 +40,8 @@ export const SonnerToast: Story = {
           onClick={() =>
             toast.error("Could not save", {
               description: "Try again from a stable connection.",
-            })}
+            })
+          }
         >
           Show error
         </Button>

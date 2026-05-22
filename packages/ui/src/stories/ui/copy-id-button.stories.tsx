@@ -20,5 +20,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => <CopyIdButton value="usr_01HX8J7QZ6KV">Copy user ID</CopyIdButton>,
+  render: () => (
+    <CopyIdButton value="usr_01HX8J7QZ6KV">Copy user ID</CopyIdButton>
+  ),
 }

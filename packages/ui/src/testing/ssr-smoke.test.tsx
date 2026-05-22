@@ -60,19 +60,17 @@ describe("SSR smoke coverage", () => {
   })
 
   it("renders data table utilities on the server", () => {
-    expect(fixture.renderDataTableFixture()).toContain(
-      'data-slot="data-table"',
-    )
+    expect(fixture.renderDataTableFixture()).toContain('data-slot="data-table"')
     expect(fixture.renderDataTableFixture()).toContain("Ada Lovelace")
     expect(fixture.renderDataTableFiltersFixture()).toContain(
-      'data-slot="data-table-filters"',
+      'data-slot="data-table-filters"'
     )
     expect(fixture.renderDataTableFiltersFixture()).toContain("Search by name")
   })
 
   it("renders interaction utilities on the server", () => {
     expect(fixture.renderCopyIdButtonFixture()).toContain(
-      'data-slot="copy-id-button"',
+      'data-slot="copy-id-button"'
     )
     expect(fixture.renderMarqueeFixture()).toContain('data-slot="marquee"')
     expect(fixture.renderToastFixture()).toContain("Notifications")

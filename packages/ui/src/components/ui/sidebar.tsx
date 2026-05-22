@@ -3,7 +3,13 @@ import { Polymorphic } from "@kobalte/core"
 import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
 import { Menu } from "lucide-solid"
-import type { Accessor, Component, ComponentProps, JSX, ValidComponent } from "solid-js"
+import type {
+  Accessor,
+  Component,
+  ComponentProps,
+  JSX,
+  ValidComponent,
+} from "solid-js"
 import {
   createContext,
   createEffect,
@@ -17,15 +23,22 @@ import {
   Switch,
   useContext,
 } from "solid-js"
-import { cn } from "#lib/utils"
-import { useIsMobile } from "#hooks/use-mobile"
+
 import type { ButtonProps } from "#components/ui/button"
 import { Button } from "#components/ui/button"
 import { Input } from "#components/ui/input"
 import { Separator } from "#components/ui/separator"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "#components/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "#components/ui/sheet"
 import { Skeleton } from "#components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "#components/ui/tooltip"
+import { useIsMobile } from "#hooks/use-mobile"
+import { cn } from "#lib/utils"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -82,7 +95,7 @@ const SidebarProvider = (props: SidebarProviderProps) => {
   const setOpen = (value: boolean | ((value: boolean) => boolean)) => {
     if (local.onOpenChange) {
       return local.onOpenChange?.(
-        typeof value === "function" ? value(open()) : value,
+        typeof value === "function" ? value(open()) : value
       )
     }
     _setOpen(value)
@@ -140,7 +153,7 @@ const SidebarProvider = (props: SidebarProviderProps) => {
         }}
         class={cn(
           "group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar",
-          local.class,
+          local.class
         )}
         {...others}
       >
@@ -163,7 +176,7 @@ const Sidebar: Component<SidebarProps> = (props) => {
       variant: "sidebar",
       collapsible: "offcanvas",
     },
-    props,
+    props
   )
   const [local, others] = splitProps(mergedProps, [
     "side",
@@ -181,7 +194,7 @@ const Sidebar: Component<SidebarProps> = (props) => {
         <div
           class={cn(
             "flex h-full w-(--sidebar-width) flex-col bg-sidebar text-sidebar-foreground",
-            local.class,
+            local.class
           )}
           data-slot="sidebar"
           {...others}
@@ -227,7 +240,7 @@ const Sidebar: Component<SidebarProps> = (props) => {
               "group-data-[side=right]:rotate-180",
               local.variant === "floating" || local.variant === "inset"
                 ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
-                : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)",
+                : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
             )}
           />
           <div
@@ -241,7 +254,7 @@ const Sidebar: Component<SidebarProps> = (props) => {
               local.variant === "floating" || local.variant === "inset"
                 ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
                 : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
-              local.class,
+              local.class
             )}
             {...others}
           >
@@ -304,7 +317,7 @@ const SidebarRail = (props: ComponentProps<"button">) => {
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:left-full",
         "[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
         "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -318,7 +331,7 @@ const SidebarInset = (props: ComponentProps<"main">) => {
       data-slot="sidebar-inset"
       class={cn(
         "relative z-sidebar-inset flex w-full flex-1 flex-col",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -367,7 +380,7 @@ type SidebarSeparatorProps<T extends ValidComponent = "hr"> = PolymorphicProps<
 >
 
 const SidebarSeparator = <T extends ValidComponent = "hr">(
-  props: SidebarSeparatorProps<T>,
+  props: SidebarSeparatorProps<T>
 ) => {
   const [local, others] = splitProps(props as SidebarSeparatorProps, ["class"])
   return (
@@ -388,7 +401,7 @@ const SidebarContent = (props: ComponentProps<"div">) => {
       data-sidebar="content"
       class={cn(
         "z-sidebar-content flex min-h-0 flex-1 flex-col overflow-auto group-data-[collapsible=icon]:overflow-hidden",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -403,21 +416,20 @@ const SidebarGroup = (props: ComponentProps<"div">) => {
       data-sidebar="group"
       class={cn(
         "relative z-sidebar-group flex w-full min-w-0 flex-col",
-        local.class,
+        local.class
       )}
       {...others}
     />
   )
 }
 
-type SidebarGroupLabelProps<T extends ValidComponent = "div"> = PolymorphicProps<T, ComponentProps<T>>
+type SidebarGroupLabelProps<T extends ValidComponent = "div"> =
+  PolymorphicProps<T, ComponentProps<T>>
 
 const SidebarGroupLabel = <T extends ValidComponent = "div">(
-  props: SidebarGroupLabelProps<T>,
+  props: SidebarGroupLabelProps<T>
 ) => {
-  const [local, others] = splitProps(props as SidebarGroupLabelProps, [
-    "class",
-  ])
+  const [local, others] = splitProps(props as SidebarGroupLabelProps, ["class"])
 
   return (
     <Polymorphic<SidebarGroupLabelProps>
@@ -426,17 +438,18 @@ const SidebarGroupLabel = <T extends ValidComponent = "div">(
       data-sidebar="group-label"
       class={cn(
         "z-sidebar-group-label flex shrink-0 items-center outline-hidden [&>svg]:shrink-0",
-        local.class,
+        local.class
       )}
       {...others}
     />
   )
 }
 
-type SidebarGroupActionProps<T extends ValidComponent = "button"> = PolymorphicProps<T, ComponentProps<T>>
+type SidebarGroupActionProps<T extends ValidComponent = "button"> =
+  PolymorphicProps<T, ComponentProps<T>>
 
 const SidebarGroupAction = <T extends ValidComponent = "button">(
-  props: SidebarGroupActionProps<T>,
+  props: SidebarGroupActionProps<T>
 ) => {
   const [local, others] = splitProps(props as SidebarGroupActionProps, [
     "class",
@@ -448,7 +461,7 @@ const SidebarGroupAction = <T extends ValidComponent = "button">(
       data-sidebar="group-action"
       class={cn(
         "z-sidebar-group-action flex aspect-square items-center justify-center outline-hidden transition-transform after:absolute after:-inset-2 group-data-[collapsible=icon]:hidden md:after:hidden [&>svg]:shrink-0",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -509,23 +522,22 @@ const sidebarMenuButtonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 )
 
 type SidebarMenuButtonProps<T extends ValidComponent = "button"> =
-  & PolymorphicProps<T, Pick<ComponentProps<T>, "class" | "children">>
-  & VariantProps<typeof sidebarMenuButtonVariants>
-  & {
-    isActive?: boolean
-    tooltip?: string
-  }
+  PolymorphicProps<T, Pick<ComponentProps<T>, "class" | "children">> &
+    VariantProps<typeof sidebarMenuButtonVariants> & {
+      isActive?: boolean
+      tooltip?: string
+    }
 
 const SidebarMenuButton = <T extends ValidComponent = "button">(
-  rawProps: SidebarMenuButtonProps<T>,
+  rawProps: SidebarMenuButtonProps<T>
 ) => {
   const mergedProps = mergeProps(
     { isActive: false, variant: "default", size: "default" },
-    rawProps,
+    rawProps
   )
   const [local, others] = splitProps(mergedProps as SidebarMenuButtonProps, [
     "isActive",
@@ -539,7 +551,7 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
   const MenuButton = (buttonProps: SidebarMenuButtonProps) => {
     const [_local, _others] = splitProps(
       buttonProps as SidebarMenuButtonProps,
-      ["class"],
+      ["class"]
     )
     return (
       <Polymorphic<SidebarMenuButtonProps>
@@ -554,7 +566,7 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
             size: local.size,
           }),
           _local.class,
-          local.class,
+          local.class
         )}
         {..._others}
         {...others}
@@ -574,12 +586,13 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
   )
 }
 
-type SidebarMenuActionProps<T extends ValidComponent = "button"> = ComponentProps<T> & {
-  showOnHover?: boolean
-}
+type SidebarMenuActionProps<T extends ValidComponent = "button"> =
+  ComponentProps<T> & {
+    showOnHover?: boolean
+  }
 
 const SidebarMenuAction = <T extends ValidComponent = "button">(
-  rawProps: PolymorphicProps<T, SidebarMenuActionProps<T>>,
+  rawProps: PolymorphicProps<T, SidebarMenuActionProps<T>>
 ) => {
   const props = mergeProps({ showOnHover: false }, rawProps)
   const [local, others] = splitProps(props as SidebarMenuActionProps, [
@@ -596,7 +609,7 @@ const SidebarMenuAction = <T extends ValidComponent = "button">(
         "z-sidebar-menu-action flex items-center justify-center outline-hidden transition-transform after:absolute after:-inset-2 group-data-[collapsible=icon]:hidden md:after:hidden [&>svg]:shrink-0",
         local.showOnHover &&
           "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-open:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground md:opacity-0",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -611,7 +624,7 @@ const SidebarMenuBadge: Component<ComponentProps<"div">> = (props) => {
       data-sidebar="menu-badge"
       class={cn(
         "z-sidebar-menu-badge flex select-none items-center justify-center tabular-nums group-data-[collapsible=icon]:hidden",
-        local.class,
+        local.class
       )}
       {...others}
     />
@@ -677,13 +690,14 @@ const SidebarMenuSubItem: Component<ComponentProps<"li">> = (props) => {
   )
 }
 
-type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> = ComponentProps<T> & {
-  size?: "sm" | "md"
-  isActive?: boolean
-}
+type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> =
+  ComponentProps<T> & {
+    size?: "sm" | "md"
+    isActive?: boolean
+  }
 
 const SidebarMenuSubButton = <T extends ValidComponent = "a">(
-  rawProps: PolymorphicProps<T, SidebarMenuSubButtonProps<T>>,
+  rawProps: PolymorphicProps<T, SidebarMenuSubButtonProps<T>>
 ) => {
   const props = mergeProps({ size: "md" }, rawProps)
   const [local, others] = splitProps(props as SidebarMenuSubButtonProps, [
@@ -701,7 +715,7 @@ const SidebarMenuSubButton = <T extends ValidComponent = "a">(
       data-active={local.isActive}
       class={cn(
         "z-sidebar-menu-sub-button flex min-w-0 -translate-x-px items-center overflow-hidden outline-hidden disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 group-data-[collapsible=icon]:hidden [&>span:last-child]:truncate [&>svg]:shrink-0",
-        local.class,
+        local.class
       )}
       {...others}
     />

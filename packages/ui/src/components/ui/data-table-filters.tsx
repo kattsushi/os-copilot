@@ -30,7 +30,8 @@ const DataTableFilters = (props: DataTableFiltersProps) => {
     "title",
   ])
 
-  const hasActiveFilters = () => local.filters.some((filter) => filter.value.length > 0)
+  const hasActiveFilters = () =>
+    local.filters.some((filter) => filter.value.length > 0)
 
   return (
     <div
@@ -67,7 +68,9 @@ const DataTableFilters = (props: DataTableFiltersProps) => {
                     inputMode="search"
                     value={filter().value}
                     placeholder={filter().placeholder}
-                    onInput={(event) => filter().onValueChange(event.currentTarget.value)}
+                    onInput={(event) =>
+                      filter().onValueChange(event.currentTarget.value)
+                    }
                     class="min-h-11"
                   />
                 </label>
@@ -95,4 +98,8 @@ const DataTableFilters = (props: DataTableFiltersProps) => {
   )
 }
 
-export { DataTableFilters, type DataTableFiltersProps, type DataTableTextFilter }
+export {
+  DataTableFilters,
+  type DataTableFiltersProps,
+  type DataTableTextFilter,
+}

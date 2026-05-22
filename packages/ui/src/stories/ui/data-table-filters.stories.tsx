@@ -1,10 +1,9 @@
+import type { ColumnDef } from "@tanstack/solid-table"
 import { createMemo, createSignal } from "solid-js"
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { DataTable } from "#components/ui/data-table"
 import { DataTableFilters } from "#components/ui/data-table-filters"
-
-import type { ColumnDef } from "@tanstack/solid-table"
 
 type Person = {
   name: string
@@ -52,7 +51,7 @@ export const FilteredPeople: Story = {
       return people.filter(
         (person) =>
           person.name.toLowerCase().includes(nameQuery) &&
-          person.team.toLowerCase().includes(teamQuery),
+          person.team.toLowerCase().includes(teamQuery)
       )
     })
 

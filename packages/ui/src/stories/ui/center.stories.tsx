@@ -15,7 +15,8 @@ export const Default: Story = {
   render: () => (
     <Center class="min-h-40 rounded-lg border border-dashed p-6 text-center">
       <p class="max-w-xs text-sm text-muted-foreground">
-        Center keeps compact content readable on mobile and centered in its container.
+        Center keeps compact content readable on mobile and centered in its
+        container.
       </p>
     </Center>
   ),

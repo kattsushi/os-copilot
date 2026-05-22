@@ -63,7 +63,6 @@ catalog:
   better-auth: 1.6.11
   class-variance-authority: 0.7.1
   clsx: 2.1.1
-  dprint: 0.54.0
   alchemy: 2.0.0-beta.40
   echarts: 6.0.0
   effect: 4.0.0-beta.66
@@ -73,7 +72,7 @@ catalog:
   jsdom: 29.1.1
   nx: 22.7.1
   nx-oxlint: 0.1.1
-  oxlint: 1.64.0
+  oxlint: 1.65.0
   solid-js: 1.9.12
   solid-sonner: 0.3.1
   storybook: 10.4.0

@@ -45,11 +45,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run oxlint
-        run: pnpm exec oxlint
-
-      - name: Check formatting
-        run: pnpm exec dprint check
+      - name: Lint + format check
+        run: pnpm run check
 
   typecheck:
     name: Typecheck affected projects

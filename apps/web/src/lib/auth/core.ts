@@ -32,13 +32,13 @@ export type SessionCapableAuth<TSession = unknown> = {
 export function resolveAuthConfig(env: AuthEnv) {
   if (!env.AUTH_DB || typeof env.AUTH_DB.prepare !== "function") {
     throw new Error(
-      "Missing Cloudflare D1 binding AUTH_DB. Check Alchemy bindings for Website.",
+      "Missing Cloudflare D1 binding AUTH_DB. Check Alchemy bindings for Website."
     )
   }
 
   if (!env.BETTER_AUTH_SECRET) {
     throw new Error(
-      "Missing BETTER_AUTH_SECRET. Add it to apps/web/.env or deployed worker env.",
+      "Missing BETTER_AUTH_SECRET. Add it to apps/web/.env or deployed worker env."
     )
   }
 
@@ -55,7 +55,7 @@ export function resolveAuthConfig(env: AuthEnv) {
 
 export async function getSessionFromHeaders<TSession>(
   auth: SessionCapableAuth<TSession>,
-  headers: Headers,
+  headers: Headers
 ) {
   return (await auth.api.getSession({ headers })) ?? null
 }

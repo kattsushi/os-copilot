@@ -1,7 +1,3 @@
-import { createSignal } from "solid-js"
-import { render } from "solid-js/web"
-import { afterEach, describe, expect, it } from "vitest"
-
 import {
   Button,
   Center,
@@ -15,6 +11,9 @@ import {
   toast,
   Toaster,
 } from "@os-copilot/ui"
+import { createSignal } from "solid-js"
+import { render } from "solid-js/web"
+import { afterEach, describe, expect, it } from "vitest"
 
 afterEach(() => {
   document.body.replaceChildren()
@@ -28,7 +27,7 @@ describe("SPA smoke coverage", () => {
     const dispose = render(() => <Center>Mounted layout</Center>, host)
 
     expect(host.querySelector('[data-slot="center"]')?.textContent).toBe(
-      "Mounted layout",
+      "Mounted layout"
     )
     dispose()
   })
@@ -39,7 +38,7 @@ describe("SPA smoke coverage", () => {
     const dispose = render(() => <Button>Continue</Button>, host)
 
     expect(host.querySelector('[data-slot="button"]')?.textContent).toBe(
-      "Continue",
+      "Continue"
     )
     dispose()
   })
@@ -68,10 +67,12 @@ describe("SPA smoke coverage", () => {
           />
         </div>
       ),
-      host,
+      host
     )
 
-    const input = host.querySelector<HTMLInputElement>("#data-table-filter-name")
+    const input = host.querySelector<HTMLInputElement>(
+      "#data-table-filter-name"
+    )
     input?.focus()
     input!.value = "Ada L"
     input!.dispatchEvent(new InputEvent("input", { bubbles: true }))
@@ -79,10 +80,10 @@ describe("SPA smoke coverage", () => {
     expect(name()).toBe("Ada L")
     expect(document.activeElement).toBe(input)
     expect(
-      host.querySelector('[data-slot="data-table-filters"]')?.textContent,
+      host.querySelector('[data-slot="data-table-filters"]')?.textContent
     ).toContain("Name")
     expect(
-      host.querySelector('[data-slot="data-table"]')?.textContent,
+      host.querySelector('[data-slot="data-table"]')?.textContent
     ).toContain("Ada Lovelace")
     dispose()
   })
@@ -101,16 +102,16 @@ describe("SPA smoke coverage", () => {
           <Toaster />
         </>
       ),
-      host,
+      host
     )
 
     toast.success("Mounted toast")
 
     expect(
-      host.querySelector('[data-slot="copy-id-button"]')?.textContent,
+      host.querySelector('[data-slot="copy-id-button"]')?.textContent
     ).toContain("Copy")
     expect(host.querySelector('[data-slot="marquee"]')?.textContent).toContain(
-      "Motion",
+      "Motion"
     )
     expect(document.body.textContent).toContain("Mounted toast")
     dispose()
@@ -127,7 +128,7 @@ describe("SPA smoke coverage", () => {
           </DialogContent>
         </Dialog>
       ),
-      host,
+      host
     )
 
     expect(document.body.textContent).toContain("Mounted dialog")

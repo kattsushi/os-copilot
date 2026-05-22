@@ -6,6 +6,11 @@
   "sideEffects": [
     "**/*.css"
   ],
+  "imports": {
+    "#components/*": "./src/components/*.tsx",
+    "#lib/*": "./src/lib/*.ts",
+    "#hooks/*": "./src/hooks/*.ts"
+  },
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -165,32 +170,12 @@
       "import": "./src/hooks/*.ts"
     }
   },
-  "imports": {
-    "#components/*": "./src/components/*.tsx",
-    "#lib/*": "./src/lib/*.ts",
-    "#hooks/*": "./src/hooks/*.ts"
-  },
   "scripts": {
     "build": "vite build && tsgo -p tsconfig.lib.json",
     "typecheck": "tsgo --noEmit -p tsconfig.json",
     "test": "vitest run --passWithNoTests",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
-  },
-  "peerDependencies": {
-    "solid-js": "catalog:"
-  },
-  "devDependencies": {
-    "@effect/tsgo": "catalog:",
-    "@testing-library/jest-dom": "catalog:",
-    "jsdom": "catalog:",
-    "solid-js": "catalog:",
-    "storybook": "catalog:",
-    "storybook-solidjs-vite": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vite-plugin-solid": "catalog:",
-    "vitest": "catalog:"
   },
   "dependencies": {
     "@fontsource-variable/inter": "catalog:",
@@ -204,5 +189,20 @@
     "tailwind-merge": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:"
+  },
+  "devDependencies": {
+    "@effect/tsgo": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "jsdom": "catalog:",
+    "solid-js": "catalog:",
+    "storybook": "catalog:",
+    "storybook-solidjs-vite": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "solid-js": "catalog:"
   }
 }

@@ -42,7 +42,7 @@ const Grid = (props: GridProps) => {
       class={cn(
         "grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,var(--grid-min-item-width)),1fr))]",
         gridGap[local.gap ?? "md"],
-        local.class,
+        local.class
       )}
       style={style()}
       {...others}

@@ -1,8 +1,17 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "#components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "#components/ui/table"
 
-const meta = { title: "UI/Table", component: Table } satisfies Meta<typeof Table>
+const meta = { title: "UI/Table", component: Table } satisfies Meta<
+  typeof Table
+>
 export default meta
 type Story = StoryObj<typeof meta>
 export const Default: Story = {

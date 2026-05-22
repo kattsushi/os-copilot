@@ -3,7 +3,9 @@ import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import { X } from "lucide-solid"
 import type { Component, ComponentProps, ValidComponent } from "solid-js"
 import { mergeProps, Show, splitProps } from "solid-js"
+
 import { cn } from "#lib/utils"
+
 import { Button } from "./button"
 
 const Sheet: Component<SheetPrimitive.DialogRootProps> = (props) => {
@@ -15,7 +17,9 @@ type SheetTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
   SheetPrimitive.DialogTriggerProps<T>
 >
 
-const SheetTrigger = <T extends ValidComponent = "button">(props: SheetTriggerProps<T>) => {
+const SheetTrigger = <T extends ValidComponent = "button">(
+  props: SheetTriggerProps<T>
+) => {
   return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
 }
 
@@ -24,7 +28,9 @@ type SheetCloseProps<T extends ValidComponent = "button"> = PolymorphicProps<
   SheetPrimitive.DialogCloseButtonProps<T>
 >
 
-const SheetClose = <T extends ValidComponent = "button">(props: SheetCloseProps<T>) => {
+const SheetClose = <T extends ValidComponent = "button">(
+  props: SheetCloseProps<T>
+) => {
   return <SheetPrimitive.CloseButton data-slot="sheet-close" {...props} />
 }
 
@@ -32,14 +38,15 @@ const SheetPortal = (props: SheetPrimitive.DialogPortalProps) => {
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
 }
 
-type SheetOverlayProps<T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    SheetPrimitive.DialogOverlayProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
+type SheetOverlayProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SheetPrimitive.DialogOverlayProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const SheetOverlay = <T extends ValidComponent = "div">(props: SheetOverlayProps<T>) => {
+const SheetOverlay = <T extends ValidComponent = "div">(
+  props: SheetOverlayProps<T>
+) => {
   const [local, others] = splitProps(props as SheetOverlayProps, ["class"])
   return (
     <SheetPrimitive.Overlay
@@ -50,23 +57,28 @@ const SheetOverlay = <T extends ValidComponent = "div">(props: SheetOverlayProps
   )
 }
 
-type SheetContentProps<T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    SheetPrimitive.DialogContentProps<T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
-  & {
+type SheetContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SheetPrimitive.DialogContentProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children"> & {
     side?: "top" | "right" | "bottom" | "left"
     showCloseButton?: boolean
   }
 
-const SheetContent = <T extends ValidComponent = "div">(props: SheetContentProps<T>) => {
+const SheetContent = <T extends ValidComponent = "div">(
+  props: SheetContentProps<T>
+) => {
   const mergedProps = mergeProps(
     { side: "right", showCloseButton: true } as SheetContentProps,
-    props,
+    props
   )
-  const [local, others] = splitProps(mergedProps, ["class", "children", "side", "showCloseButton"])
+  const [local, others] = splitProps(mergedProps, [
+    "class",
+    "children",
+    "side",
+    "showCloseButton",
+  ])
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -120,14 +132,15 @@ const SheetFooter = (props: SheetFooterProps) => {
   )
 }
 
-type SheetTitleProps<T extends ValidComponent = "h2"> =
-  & PolymorphicProps<
-    T,
-    SheetPrimitive.DialogTitleProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
+type SheetTitleProps<T extends ValidComponent = "h2"> = PolymorphicProps<
+  T,
+  SheetPrimitive.DialogTitleProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const SheetTitle = <T extends ValidComponent = "h2">(props: SheetTitleProps<T>) => {
+const SheetTitle = <T extends ValidComponent = "h2">(
+  props: SheetTitleProps<T>
+) => {
   const [local, others] = splitProps(props as SheetTitleProps, ["class"])
   return (
     <SheetPrimitive.Title
@@ -138,14 +151,15 @@ const SheetTitle = <T extends ValidComponent = "h2">(props: SheetTitleProps<T>) 
   )
 }
 
-type SheetDescriptionProps<T extends ValidComponent = "p"> =
-  & PolymorphicProps<
-    T,
-    SheetPrimitive.DialogDescriptionProps<T>
-  >
-  & Pick<ComponentProps<T>, "class">
+type SheetDescriptionProps<T extends ValidComponent = "p"> = PolymorphicProps<
+  T,
+  SheetPrimitive.DialogDescriptionProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const SheetDescription = <T extends ValidComponent = "p">(props: SheetDescriptionProps<T>) => {
+const SheetDescription = <T extends ValidComponent = "p">(
+  props: SheetDescriptionProps<T>
+) => {
   const [local, others] = splitProps(props as SheetDescriptionProps, ["class"])
   return (
     <SheetPrimitive.Description
@@ -156,4 +170,13 @@ const SheetDescription = <T extends ValidComponent = "p">(props: SheetDescriptio
   )
 }
 
-export { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger }
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+}

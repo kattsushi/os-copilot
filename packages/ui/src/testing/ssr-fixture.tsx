@@ -24,7 +24,9 @@ export function renderGridPatternFixture() {
 }
 
 export function renderCopyIdButtonFixture() {
-  return renderToString(() => <CopyIdButton value="user_123">Copy user ID</CopyIdButton>)
+  return renderToString(() => (
+    <CopyIdButton value="user_123">Copy user ID</CopyIdButton>
+  ))
 }
 
 export function renderMarqueeFixture() {

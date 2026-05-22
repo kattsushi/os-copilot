@@ -388,7 +388,7 @@ Requirements:
 
 - `build`: Vite library build.
 - `typecheck`: TypeScript/tsgo typecheck for the library.
-- `lint`: oxlint/dprint compatible lint formatting path.
+- `lint`: Ultracite-compatible lint/formatting path (Oxlint + Oxfmt).
 - `test`: Vitest smoke/unit tests where applicable.
 - `storybook`: local Storybook, using Nx's default inferred task name where possible.
 - `build-storybook`: CI/cacheable static Storybook build.

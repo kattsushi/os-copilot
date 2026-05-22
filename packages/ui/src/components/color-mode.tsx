@@ -1,4 +1,11 @@
-import { type Accessor, createContext, createSignal, type ParentProps, untrack, useContext } from "solid-js"
+import {
+  type Accessor,
+  createContext,
+  createSignal,
+  type ParentProps,
+  untrack,
+  useContext,
+} from "solid-js"
 
 export const ZAIDAN_COLOR_MODE_COOKIE_KEY = "zaidan-color-mode"
 
@@ -15,9 +22,11 @@ export const ColorModeContext = createContext<ColorModeContextValue>()
 export function ColorModeProvider(
   props: ParentProps<{
     initialColorMode: ColorMode
-  }>,
+  }>
 ) {
-  const [colorMode, setColorMode] = createSignal<ColorMode>(props.initialColorMode)
+  const [colorMode, setColorMode] = createSignal<ColorMode>(
+    props.initialColorMode
+  )
 
   const toggleColorMode = () => {
     setColorMode((prev) => (prev === "dark" ? "light" : "dark"))
@@ -33,7 +42,9 @@ export function ColorModeProvider(
   }
 
   return (
-    <ColorModeContext.Provider value={{ colorMode, toggleColorMode, setColorMode }}>
+    <ColorModeContext.Provider
+      value={{ colorMode, toggleColorMode, setColorMode }}
+    >
       {props.children}
     </ColorModeContext.Provider>
   )
@@ -52,4 +63,4 @@ export const getClientColorMode = () =>
     .split("; ")
     .find((cookie) => cookie.startsWith(`${ZAIDAN_COLOR_MODE_COOKIE_KEY}=`))
     ?.split("=")[1] ??
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")

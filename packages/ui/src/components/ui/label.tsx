@@ -1,5 +1,6 @@
 import type { ComponentProps } from "solid-js"
 import { splitProps } from "solid-js"
+
 import { cn } from "#lib/utils"
 
 type LabelProps = ComponentProps<"label">
@@ -11,7 +12,7 @@ const Label = (props: LabelProps) => {
     <label
       class={cn(
         "z-label flex select-none items-center peer-disabled:cursor-not-allowed group-data-[disabled=true]:pointer-events-none",
-        local.class,
+        local.class
       )}
       data-slot="label"
       {...others}

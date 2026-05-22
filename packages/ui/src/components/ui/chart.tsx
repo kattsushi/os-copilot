@@ -1,6 +1,23 @@
-import { BarChart, LineChart, PieChart, RadarChart, ScatterChart } from "echarts/charts"
-import { GridComponent, LegendComponent, TitleComponent, TooltipComponent } from "echarts/components"
-import { type ECharts, type EChartsCoreOption, init, type SetOptionOpts, use } from "echarts/core"
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  RadarChart,
+  ScatterChart,
+} from "echarts/charts"
+import {
+  GridComponent,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+} from "echarts/components"
+import {
+  type ECharts,
+  type EChartsCoreOption,
+  init,
+  type SetOptionOpts,
+  use,
+} from "echarts/core"
 import { SVGRenderer } from "echarts/renderers"
 import type { Component, ComponentProps, JSX } from "solid-js"
 import {
@@ -14,6 +31,7 @@ import {
   splitProps,
   useContext,
 } from "solid-js"
+
 import { cn } from "#lib/utils"
 
 // Register ECharts components - using SVG renderer for CSS variable support
@@ -103,7 +121,7 @@ export function useChart() {
  */
 function getConfigColor(
   configEntry: ChartConfig[string] | undefined,
-  isDark: boolean,
+  isDark: boolean
 ): string | undefined {
   if (!configEntry) return undefined
 
@@ -120,7 +138,7 @@ function getConfigColor(
  */
 function buildChartStyles(
   config: ChartConfig,
-  isDark: boolean,
+  isDark: boolean
 ): Record<string, string> {
   const styles: Record<string, string> = {}
 
@@ -145,7 +163,7 @@ function useIsDarkMode() {
     const updateDarkMode = () => {
       setIsDark(
         html.classList.contains("dark") ||
-          html.getAttribute("data-kb-theme") === "dark",
+          html.getAttribute("data-kb-theme") === "dark"
       )
     }
 
@@ -195,7 +213,7 @@ function ChartContainer(props: ChartContainerProps) {
       loadingOptions: {},
       setOptionOpts: { notMerge: true } as SetOptionOpts,
     },
-    props,
+    props
   )
 
   const [local, others] = splitProps(mergedProps, [
@@ -259,8 +277,8 @@ function ChartContainer(props: ChartContainerProps) {
       (newOption) => {
         chartInstance?.setOption(newOption, local.setOptionOpts)
       },
-      { defer: true },
-    ),
+      { defer: true }
+    )
   )
 
   // Handle loading state
@@ -273,14 +291,15 @@ function ChartContainer(props: ChartContainerProps) {
         } else {
           chartInstance?.hideLoading()
         }
-      },
-    ),
+      }
+    )
   )
 
   // Compute styles with chart color variables
   const chartStyles = () => {
     const configStyles = buildChartStyles(local.config, isDark())
-    const userStyles = typeof local.style === "object" ? (local.style as object) : {}
+    const userStyles =
+      typeof local.style === "object" ? (local.style as object) : {}
     return { ...configStyles, ...userStyles }
   }
 
@@ -295,7 +314,7 @@ function ChartContainer(props: ChartContainerProps) {
         class={cn(
           "flex aspect-video justify-center text-xs",
           "[&_.echarts-tooltip]:rounded-lg [&_.echarts-tooltip]:border [&_.echarts-tooltip]:border-border/50 [&_.echarts-tooltip]:bg-background [&_.echarts-tooltip]:text-foreground [&_.echarts-tooltip]:shadow-xl",
-          local.class,
+          local.class
         )}
         style={chartStyles()}
         {...others}

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/solid-router"
 import { createServerFn } from "@tanstack/solid-start"
+
 import { SessionPanel } from "../components/SessionPanel"
 import { getSession } from "../lib/auth/session"
 
@@ -23,8 +24,8 @@ function HomePage() {
       <p class="eyebrow">os-copilot</p>
       <h1>Architecture-aware operating system copilot</h1>
       <p>
-        Clone reference repositories into{" "}
-        <code>repos/</code>, then use the repo architecture explorer skill to extract reusable product and code
+        Clone reference repositories into <code>repos/</code>, then use the repo
+        architecture explorer skill to extract reusable product and code
         patterns.
       </p>
       <p>

@@ -1,5 +1,3 @@
-import { describe, expect, it } from "vitest"
-
 import {
   Button as RootButton,
   Center,
@@ -23,6 +21,7 @@ import { Grid as SourceRoutedGrid } from "@os-copilot/ui/components/ui/grid"
 import { GridPattern as SourceRoutedGridPattern } from "@os-copilot/ui/components/ui/grid-pattern"
 import { Stack as SourceRoutedStack } from "@os-copilot/ui/components/ui/stack"
 import { cn as SourceRoutedCn } from "@os-copilot/ui/lib/utils"
+import { describe, expect, it } from "vitest"
 
 const publicComponentSubpathImports = {
   "alert-dialog": () => import("@os-copilot/ui/alert-dialog"),
@@ -87,8 +86,8 @@ describe("ui package public exports", () => {
       Object.entries(publicComponentSubpathImports).map(
         async ([subpath, load]) => {
           await expect(load(), subpath).resolves.toBeDefined()
-        },
-      ),
+        }
+      )
     )
   })
 })

@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Separator } from "#components/ui/separator"
 
-const meta = { title: "UI/Separator", component: Separator } satisfies Meta<typeof Separator>
+const meta = { title: "UI/Separator", component: Separator } satisfies Meta<
+  typeof Separator
+>
 export default meta
 type Story = StoryObj<typeof meta>
 export const Default: Story = {

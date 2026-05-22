@@ -1,4 +1,5 @@
 import { createSignal, Show } from "solid-js"
+
 import { authClient } from "../lib/auth/client"
 
 type AuthMode = "login" | "register"
@@ -24,14 +25,14 @@ export function AuthForm(props: Readonly<{ mode: AuthMode }>) {
 
     const result = isRegister()
       ? await authClient.signUp.email({
-        ...payload,
-        name: name() || email(),
-        callbackURL: "/account",
-      })
+          ...payload,
+          name: name() || email(),
+          callbackURL: "/account",
+        })
       : await authClient.signIn.email({
-        ...payload,
-        callbackURL: "/account",
-      })
+          ...payload,
+          callbackURL: "/account",
+        })
 
     setIsSubmitting(false)
 
@@ -90,12 +91,13 @@ export function AuthForm(props: Readonly<{ mode: AuthMode }>) {
           {isSubmitting()
             ? "Working…"
             : isRegister()
-            ? "Create account"
-            : "Login"}
+              ? "Create account"
+              : "Login"}
         </button>
       </form>
       <p class="auth-switch">
-        {isRegister() ? "Already have an account?" : "Need an account?"}{"  "}
+        {isRegister() ? "Already have an account?" : "Need an account?"}
+        {"  "}
         <a href={isRegister() ? "/login" : "/register"}>
           {isRegister() ? "Login" : "Register"}
         </a>
