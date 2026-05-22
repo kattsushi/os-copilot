@@ -48,7 +48,7 @@ const Marquee = (props: MarqueeProps) => {
         class={cn(
           "flex min-w-max shrink-0 items-center gap-4 py-1 motion-reduce:animate-none",
           local.pauseOnHover !== false &&
-            "hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]",
+            "hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
         )}
         data-slot="marquee-track"
         style={trackStyle()}

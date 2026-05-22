@@ -10,7 +10,8 @@ type CloudflareProviderLayer = Layer.Layer<
   never
 >
 
-const cloudflareProviders = Cloudflare.providers as () => CloudflareProviderLayer
+const cloudflareProviders =
+  Cloudflare.providers as () => CloudflareProviderLayer
 
 function requiredEnv(name: string) {
   const value = process.env[name]
@@ -45,7 +46,7 @@ export default Alchemy.Stack(
     providers: cloudflareProviders(),
     state: Cloudflare.state(),
   },
-  Effect.gen(function*() {
+  Effect.gen(function* () {
     const website = yield* Website
 
     return {
@@ -53,5 +54,5 @@ export default Alchemy.Stack(
       url: website.url.as<string>(),
       domains: website.domains,
     }
-  }),
+  })
 )

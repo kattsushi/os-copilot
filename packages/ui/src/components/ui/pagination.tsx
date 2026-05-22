@@ -2,8 +2,8 @@ import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-solid"
 import type { ComponentProps } from "solid-js"
 import { mergeProps, splitProps } from "solid-js"
 
-import { cn } from "#lib/utils"
 import { Button, type ButtonProps } from "#components/ui/button"
+import { cn } from "#lib/utils"
 
 type PaginationProps = ComponentProps<"nav">
 
@@ -38,12 +38,10 @@ const PaginationItem = (props: PaginationItemProps) => {
   return <li data-slot="pagination-item" {...props} />
 }
 
-type PaginationLinkProps =
-  & {
-    isActive?: boolean
-  }
-  & Pick<ButtonProps, "size">
-  & ComponentProps<"a">
+type PaginationLinkProps = {
+  isActive?: boolean
+} & Pick<ButtonProps, "size"> &
+  ComponentProps<"a">
 
 const PaginationLink = (props: PaginationLinkProps) => {
   const mergedProps = mergeProps({ size: "icon" } as PaginationLinkProps, props)
@@ -104,7 +102,10 @@ const PaginationEllipsis = (props: PaginationEllipsisProps) => {
     <span
       aria-hidden
       data-slot="pagination-ellipsis"
-      class={cn("z-pagination-ellipsis flex items-center justify-center", local.class)}
+      class={cn(
+        "z-pagination-ellipsis flex items-center justify-center",
+        local.class
+      )}
       {...others}
     >
       <Ellipsis />

@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "#components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "#components/ui/select"
 
 const fruits = ["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"]
 
@@ -14,7 +20,9 @@ export const Default: Story = {
     <Select
       options={fruits}
       placeholder="Choose a fruit"
-      itemComponent={(props) => <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>}
+      itemComponent={(props) => (
+        <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
+      )}
     >
       <SelectTrigger aria-label="Fruit" class="w-56">
         <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>

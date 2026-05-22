@@ -1,9 +1,18 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "#components/ui/button"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "#components/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "#components/ui/sheet"
 
-const meta = { title: "UI/Sheet", component: Sheet } satisfies Meta<typeof Sheet>
+const meta = { title: "UI/Sheet", component: Sheet } satisfies Meta<
+  typeof Sheet
+>
 export default meta
 type Story = StoryObj<typeof meta>
 export const Default: Story = {

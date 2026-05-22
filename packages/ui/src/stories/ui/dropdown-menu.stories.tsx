@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "#components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "#components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "#components/ui/dropdown-menu"
 
 const meta = {
   title: "UI/Dropdown Menu",

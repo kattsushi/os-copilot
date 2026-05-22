@@ -11,7 +11,7 @@ type GridPatternProps = ComponentProps<"svg"> & {
 const GridPattern = (props: GridPatternProps) => {
   const mergedProps = mergeProps(
     { size: 32 } satisfies Partial<GridPatternProps>,
-    props,
+    props
   )
   const [local, others] = splitProps(mergedProps, ["class", "size", "title"])
   const patternId = `grid-pattern-${local.size}`
@@ -23,7 +23,7 @@ const GridPattern = (props: GridPatternProps) => {
       role={local.title ? "img" : undefined}
       class={cn(
         "pointer-events-none absolute inset-0 h-full w-full text-border",
-        local.class,
+        local.class
       )}
       fill="none"
       {...others}

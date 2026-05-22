@@ -18,7 +18,7 @@ const externalPackages = [
 
 function isExternalPackage(id: string): boolean {
   return externalPackages.some(
-    (dependency) => id === dependency || id.startsWith(`${dependency}/`),
+    (dependency) => id === dependency || id.startsWith(`${dependency}/`)
   )
 }
 

@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest"
+
 import { buildAuthRouteHandlers } from "./route-handlers"
 
 describe("buildAuthRouteHandlers", () => {
@@ -13,7 +14,7 @@ describe("buildAuthRouteHandlers", () => {
 
   it("dispatches GET requests to Better Auth", async () => {
     const handler = vi.fn(
-      async (request: Request) => new Response(request.method, { status: 200 }),
+      async (request: Request) => new Response(request.method, { status: 200 })
     )
     const handlers = buildAuthRouteHandlers({ handler })
     const request = new Request("http://localhost:3000/api/auth/session", {
@@ -29,7 +30,7 @@ describe("buildAuthRouteHandlers", () => {
 
   it("dispatches POST requests to Better Auth", async () => {
     const handler = vi.fn(
-      async (request: Request) => new Response(request.method, { status: 201 }),
+      async (request: Request) => new Response(request.method, { status: 201 })
     )
     const handlers = buildAuthRouteHandlers({ handler })
     const request = new Request(
@@ -38,7 +39,7 @@ describe("buildAuthRouteHandlers", () => {
         method: "POST",
         body: JSON.stringify({ email: "user@example.com" }),
         headers: { "content-type": "application/json" },
-      },
+      }
     )
 
     const response = await handlers.POST({ request })

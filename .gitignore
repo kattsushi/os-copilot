@@ -24,3 +24,5 @@ repos/
 
 .env.local
 .env
+.claude/worktrees
+.claude/settings.local.json

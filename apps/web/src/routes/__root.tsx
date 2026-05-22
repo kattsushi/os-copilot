@@ -1,8 +1,14 @@
 /// <reference types="vite/client" />
-import { createRootRoute, HeadContent, Link, Scripts } from "@tanstack/solid-router"
+import {
+  createRootRoute,
+  HeadContent,
+  Link,
+  Scripts,
+} from "@tanstack/solid-router"
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools"
 import * as Solid from "solid-js"
 import { HydrationScript } from "solid-js/web"
+
 import appCss from "../styles/app.css?url"
 
 export const Route = createRootRoute({

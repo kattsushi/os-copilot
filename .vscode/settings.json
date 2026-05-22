@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "dprint.dprint",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "files.exclude": {
@@ -17,16 +17,16 @@
     "**/tmp": true,
     "**/.tanstack": true,
     "**/.nx": true,
-    "**/.husky": true,
+    "**/.husky": true
   },
   "editor.codeActionsOnSave": {
     "quickfix.oxc": "explicit",
     "source.organizeImports.oxc": "explicit",
     "source.fixAll.oxc": "explicit"
   },
-  "[javascript][typescript][javascriptreact][typescriptreact][json][jsonc][css][scss][markdown]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
   "typescript.native-preview.tsdk": "node_modules/@typescript/native-preview",
-  "js/ts.experimental.useTsgo": true
+  "js/ts.experimental.useTsgo": true,
+  "emmet.showExpandedAbbreviation": "never",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true
 }

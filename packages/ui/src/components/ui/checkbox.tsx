@@ -5,15 +5,14 @@ import { type ComponentProps, splitProps, type ValidComponent } from "solid-js"
 
 import { cn } from "#lib/utils"
 
-type CheckboxProps<T extends ValidComponent = "div"> =
-  & PolymorphicProps<
-    T,
-    CheckboxPrimitive.CheckboxRootProps<T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
+type CheckboxProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  CheckboxPrimitive.CheckboxRootProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children">
 
 const Checkbox = <T extends ValidComponent = "div">(
-  props: CheckboxProps<T>,
+  props: CheckboxProps<T>
 ) => {
   const [local, others] = splitProps(props as CheckboxProps, [
     "class",
@@ -34,7 +33,7 @@ const Checkbox = <T extends ValidComponent = "div">(
       <CheckboxPrimitive.Control
         class={cn(
           "relative z-checkbox shrink-0 outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
-          local.class,
+          local.class
         )}
       >
         <CheckboxPrimitive.Indicator
@@ -49,15 +48,14 @@ const Checkbox = <T extends ValidComponent = "div">(
   )
 }
 
-type CheckboxLabelProps<T extends ValidComponent = "label"> =
-  & PolymorphicProps<
-    T,
-    CheckboxPrimitive.CheckboxLabelProps<T>
-  >
-  & Pick<ComponentProps<T>, "class" | "children">
+type CheckboxLabelProps<T extends ValidComponent = "label"> = PolymorphicProps<
+  T,
+  CheckboxPrimitive.CheckboxLabelProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children">
 
 const CheckboxLabel = <T extends ValidComponent = "label">(
-  props: CheckboxLabelProps<T>,
+  props: CheckboxLabelProps<T>
 ) => {
   const [local, others] = splitProps(props as CheckboxLabelProps, [
     "class",
@@ -68,7 +66,7 @@ const CheckboxLabel = <T extends ValidComponent = "label">(
       data-slot="checkbox-label"
       class={cn(
         "font-medium text-sm leading-none peer-data-disabled:cursor-not-allowed peer-data-disabled:opacity-70",
-        local.class,
+        local.class
       )}
       {...others}
     >

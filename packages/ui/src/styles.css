@@ -56,13 +56,19 @@
     }
 
     to {
-      height: var(--kb-accordion-content-height, var(--radix-accordion-content-height));
+      height: var(
+        --kb-accordion-content-height,
+        var(--radix-accordion-content-height)
+      );
     }
   }
 
   @keyframes accordion-up {
     from {
-      height: var(--kb-accordion-content-height, var(--radix-accordion-content-height));
+      height: var(
+        --kb-accordion-content-height,
+        var(--radix-accordion-content-height)
+      );
     }
 
     to {

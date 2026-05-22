@@ -1,12 +1,9 @@
-{
-  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "import", "oxc", "eslint", "unicorn", "node"],
-  "categories": {
-    "correctness": "error",
-    "suspicious": "error",
-    "perf": "error"
-  },
-  "ignorePatterns": [
+import { defineConfig } from "oxlint"
+import core from "ultracite/oxlint/core"
+
+export default defineConfig({
+  extends: [core],
+  ignorePatterns: [
     "**/dist/**",
     "**/build/**",
     "**/.nx/**",
@@ -14,10 +11,39 @@
     "**/node_modules/**",
     "**/coverage/**",
     "**/repos/**",
-    "**/routeTree.gen.ts"
+    "**/routeTree.gen.ts",
+
+    // Nx AI-agent config artifacts (only keep .agents standards in repo)
+    "**/.agents/**",
   ],
-  "rules": {
-    "typescript/consistent-type-imports": ["error", { "fixStyle": "inline-type-imports" }],
+  rules: {
+    // Keep Ultracite base, but relax repo-breaking rules to match existing codebase.
+    "eslint/func-style": "off",
+    "eslint/no-nested-ternary": "off",
+    "eslint/no-use-before-define": "off",
+    "eslint/require-await": "off",
+    "eslint/sort-keys": "off",
+    "import/consistent-type-specifier-style": "off",
+    "oxc/no-barrel-file": "off",
+    "typescript/consistent-type-definitions": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/no-document-cookie": "off",
+    "unicorn/no-nested-ternary": "off",
+    "unicorn/prefer-import-meta-properties": "off",
+
+    "eslint/arrow-body-style": "off",
+    "eslint/curly": "off",
+    "eslint/func-names": "off",
+    "eslint/no-empty-function": "off",
+    "eslint/require-unicode-regexp": "off",
+    "typescript/ban-types": "off",
+    "typescript/consistent-indexed-object-style": "off",
+    "unicorn/prefer-dom-node-dataset": "off",
+
+    "typescript/consistent-type-imports": [
+      "error",
+      { fixStyle: "inline-type-imports" },
+    ],
     "typescript/no-import-type-side-effects": "error",
     "import/no-duplicates": "error",
     "import/no-self-import": "error",
@@ -34,6 +60,7 @@
     "oxc/misrefactored-assign-op": "error",
     "unicorn/prefer-array-flat-map": "error",
     "unicorn/no-accessor-recursion": "error",
+
     "oxc/no-map-spread": "off",
     "eslint/object-shorthand": "off",
     "eslint/no-unused-vars": "off",
@@ -58,7 +85,14 @@
     "typescript/unified-signatures": "off",
     "typescript/no-empty-object-type": "off",
     "typescript/no-confusing-non-null-assertion": "off",
-    "typescript/array-type": ["error", { "default": "generic", "readonly": "generic" }],
-    "typescript/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
-  }
-}
+
+    "typescript/array-type": [
+      "error",
+      { default: "generic", readonly: "generic" },
+    ],
+    "typescript/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+    ],
+  },
+})

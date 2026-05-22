@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
-import { Combobox, ComboboxContent, ComboboxInput, ComboboxItem } from "#components/ui/combobox"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+} from "#components/ui/combobox"
 
 const fruits = ["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"]
 
@@ -14,7 +19,9 @@ export const Default: Story = {
     <Combobox
       options={fruits}
       placeholder="Search a fruit"
-      itemComponent={(props) => <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>}
+      itemComponent={(props) => (
+        <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
+      )}
     >
       <ComboboxInput class="w-64" />
       <ComboboxContent />

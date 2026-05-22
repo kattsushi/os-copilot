@@ -1,5 +1,17 @@
-import { CircleCheck, Info, LoaderCircle, OctagonX, TriangleAlert } from "lucide-solid"
-import { type Component, type ComponentProps, type JSX, splitProps, useContext } from "solid-js"
+import {
+  CircleCheck,
+  Info,
+  LoaderCircle,
+  OctagonX,
+  TriangleAlert,
+} from "lucide-solid"
+import {
+  type Component,
+  type ComponentProps,
+  type JSX,
+  splitProps,
+  useContext,
+} from "solid-js"
 import { Toaster as Sonner } from "solid-sonner"
 
 import { ColorModeContext } from "#components/color-mode"
@@ -7,7 +19,13 @@ import { ColorModeContext } from "#components/color-mode"
 type ToasterProps = ComponentProps<typeof Sonner>
 
 const Toaster: Component<ToasterProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "icons", "position", "style", "theme"])
+  const [local, others] = splitProps(props, [
+    "class",
+    "icons",
+    "position",
+    "style",
+    "theme",
+  ])
   const colorMode = useContext(ColorModeContext)
 
   return (
@@ -23,13 +41,15 @@ const Toaster: Component<ToasterProps> = (props) => {
         loading: <LoaderCircle class="size-4 animate-spin" />,
         ...local.icons,
       }}
-      style={{
-        "--normal-bg": "var(--popover)",
-        "--normal-text": "var(--popover-foreground)",
-        "--normal-border": "var(--border)",
-        "--border-radius": "var(--radius)",
-        ...local.style,
-      } as JSX.CSSProperties}
+      style={
+        {
+          "--normal-bg": "var(--popover)",
+          "--normal-text": "var(--popover-foreground)",
+          "--normal-border": "var(--border)",
+          "--border-radius": "var(--radius)",
+          ...local.style,
+        } as JSX.CSSProperties
+      }
       {...others}
     />
   )

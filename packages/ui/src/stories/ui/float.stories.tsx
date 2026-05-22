@@ -16,7 +16,8 @@ export const BadgeOverlay: Story = {
   render: () => (
     <div class="relative min-h-48 overflow-hidden rounded-xl border bg-muted p-6">
       <p class="max-w-xs text-sm text-muted-foreground">
-        Float positions non-interactive status content without changing document flow.
+        Float positions non-interactive status content without changing document
+        flow.
       </p>
       <Float placement="top-end">
         <Badge>New</Badge>

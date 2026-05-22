@@ -27,7 +27,7 @@ const Float = (props: FloatProps) => {
       class={cn(
         "pointer-events-none absolute z-10 max-w-[calc(100%-1.5rem)]",
         floatPlacement[local.placement ?? "bottom-end"],
-        local.class,
+        local.class
       )}
       {...others}
     />

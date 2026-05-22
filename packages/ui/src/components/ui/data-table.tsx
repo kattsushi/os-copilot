@@ -1,7 +1,25 @@
-import { type ColumnDef, createSolidTable, flexRender, getCoreRowModel } from "@tanstack/solid-table"
-import { type ComponentProps, createMemo, For, Show, splitProps } from "solid-js"
+import {
+  type ColumnDef,
+  createSolidTable,
+  flexRender,
+  getCoreRowModel,
+} from "@tanstack/solid-table"
+import {
+  type ComponentProps,
+  createMemo,
+  For,
+  Show,
+  splitProps,
+} from "solid-js"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "#components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "#components/ui/table"
 import { cn } from "#lib/utils"
 
 type DataTableProps<TData> = Omit<ComponentProps<"div">, "children"> & {
@@ -13,7 +31,7 @@ type DataTableProps<TData> = Omit<ComponentProps<"div">, "children"> & {
 
 const getHeaderLabel = <TData,>(
   column: ColumnDef<TData, unknown>,
-  fallback: string,
+  fallback: string
 ) => {
   if (typeof column.header === "string") {
     return column.header
@@ -67,7 +85,7 @@ const DataTable = <TData,>(props: DataTableProps<TData>) => {
                         <Show when={!header.isPlaceholder}>
                           {flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                         </Show>
                       </TableHead>
@@ -101,7 +119,7 @@ const DataTable = <TData,>(props: DataTableProps<TData>) => {
                         <TableCell>
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext(),
+                            cell.getContext()
                           )}
                         </TableCell>
                       )}
@@ -127,7 +145,9 @@ const DataTable = <TData,>(props: DataTableProps<TData>) => {
             {(row) => (
               <article class="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
                 <Show when={local.getMobileTitle?.(row.original)}>
-                  {(title) => <h3 class="mb-3 text-sm font-medium">{title()}</h3>}
+                  {(title) => (
+                    <h3 class="mb-3 text-sm font-medium">{title()}</h3>
+                  )}
                 </Show>
                 <dl class="grid gap-3 text-sm">
                   <For each={row.getVisibleCells()}>
@@ -136,13 +156,13 @@ const DataTable = <TData,>(props: DataTableProps<TData>) => {
                         <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                           {getHeaderLabel(
                             cell.column.columnDef,
-                            `Field ${index() + 1}`,
+                            `Field ${index() + 1}`
                           )}
                         </dt>
                         <dd class="break-words">
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext(),
+                            cell.getContext()
                           )}
                         </dd>
                       </div>

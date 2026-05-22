@@ -38,10 +38,7 @@ const CopyIdButton = (props: CopyIdButtonProps) => {
 
   const scheduleReset = () => {
     if (resetTimer) clearTimeout(resetTimer)
-    resetTimer = setTimeout(
-      () => setStatus("idle"),
-      local.resetDelayMs ?? 1800,
-    )
+    resetTimer = setTimeout(() => setStatus("idle"), local.resetDelayMs ?? 1800)
   }
 
   const copy = async () => {

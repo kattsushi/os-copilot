@@ -7,7 +7,7 @@ export function useIsMobile() {
 
   onMount(() => {
     const mediaQuery = window.matchMedia(
-      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`,
+      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`
     )
     const update = () => setIsMobile(mediaQuery.matches)
 

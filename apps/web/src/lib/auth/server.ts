@@ -1,9 +1,15 @@
 import type { D1Database } from "@cloudflare/workers-types"
+import { getRequestHeaders } from "@tanstack/solid-start/server"
 import { betterAuth } from "better-auth"
 import { tanstackStartCookies } from "better-auth/tanstack-start/solid"
-import { getRequestHeaders } from "@tanstack/solid-start/server"
 import * as cf from "cloudflare:workers"
-import { type AuthEnv, dynamicAuthBaseURL, getSessionFromHeaders, resolveAuthConfig } from "./core"
+
+import {
+  type AuthEnv,
+  dynamicAuthBaseURL,
+  getSessionFromHeaders,
+  resolveAuthConfig,
+} from "./core"
 
 const authEnv = new Proxy({} as AuthEnv, {
   get(_, prop) {

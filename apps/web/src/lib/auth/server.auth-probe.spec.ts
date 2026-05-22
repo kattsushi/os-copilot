@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+
 import { type AuthEnv, getSessionFromHeaders, resolveAuthConfig } from "./core"
 
 describe("resolveAuthConfig", () => {
@@ -22,7 +23,7 @@ describe("resolveAuthConfig", () => {
       resolveAuthConfig({
         ...baseEnv,
         BETTER_AUTH_URL: "",
-      }).BETTER_AUTH_URL,
+      }).BETTER_AUTH_URL
     ).toBeUndefined()
   })
 
@@ -44,9 +45,7 @@ describe("getSessionFromHeaders", () => {
       },
     }
 
-    await expect(
-      getSessionFromHeaders(auth, new Headers()),
-    ).resolves.toBeNull()
+    await expect(getSessionFromHeaders(auth, new Headers())).resolves.toBeNull()
   })
 
   it("returns the session payload when auth resolves a session", async () => {
@@ -61,7 +60,7 @@ describe("getSessionFromHeaders", () => {
     }
 
     await expect(
-      getSessionFromHeaders(auth, new Headers([["cookie", "auth=1"]])),
+      getSessionFromHeaders(auth, new Headers([["cookie", "auth=1"]]))
     ).resolves.toEqual(session)
   })
 })
