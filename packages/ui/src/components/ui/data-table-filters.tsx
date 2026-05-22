@@ -1,5 +1,5 @@
 import { ChevronDown, X } from "lucide-solid"
-import { type ComponentProps, For, Show, splitProps } from "solid-js"
+import { type ComponentProps, Index, Show, splitProps } from "solid-js"
 
 import { Button } from "#components/ui/button"
 import { Input } from "#components/ui/input"
@@ -54,25 +54,25 @@ const DataTableFilters = (props: DataTableFiltersProps) => {
 
         <div class="grid gap-3 border-t p-4 md:grid-cols-[1fr_auto] md:items-end">
           <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            <For each={local.filters}>
+            <Index each={local.filters}>
               {(filter) => (
                 <label
                   class="grid gap-2 text-sm font-medium"
-                  for={`data-table-filter-${filter.id}`}
+                  for={`data-table-filter-${filter().id}`}
                 >
-                  <span>{filter.label}</span>
+                  <span>{filter().label}</span>
                   <Input
-                    id={`data-table-filter-${filter.id}`}
-                    type={filter.type ?? "search"}
+                    id={`data-table-filter-${filter().id}`}
+                    type={filter().type ?? "search"}
                     inputMode="search"
-                    value={filter.value}
-                    placeholder={filter.placeholder}
-                    onInput={(event) => filter.onValueChange(event.currentTarget.value)}
+                    value={filter().value}
+                    placeholder={filter().placeholder}
+                    onInput={(event) => filter().onValueChange(event.currentTarget.value)}
                     class="min-h-11"
                   />
                 </label>
               )}
-            </For>
+            </Index>
           </div>
 
           <Show when={local.onClear}>

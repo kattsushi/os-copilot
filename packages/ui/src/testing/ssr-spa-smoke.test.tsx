@@ -1,3 +1,4 @@
+import { createSignal } from "solid-js"
 import { render } from "solid-js/web"
 import { afterEach, describe, expect, it } from "vitest"
 
@@ -46,6 +47,7 @@ describe("SPA smoke coverage", () => {
   it("mounts data table utilities in jsdom", () => {
     const host = document.createElement("div")
     document.body.append(host)
+    const [name, setName] = createSignal("Ada")
     const dispose = render(
       () => (
         <div>
@@ -54,8 +56,8 @@ describe("SPA smoke coverage", () => {
               {
                 id: "name",
                 label: "Name",
-                value: "Ada",
-                onValueChange: () => {},
+                value: name(),
+                onValueChange: setName,
               },
             ]}
           />
@@ -69,6 +71,13 @@ describe("SPA smoke coverage", () => {
       host,
     )
 
+    const input = host.querySelector<HTMLInputElement>("#data-table-filter-name")
+    input?.focus()
+    input!.value = "Ada L"
+    input!.dispatchEvent(new InputEvent("input", { bubbles: true }))
+
+    expect(name()).toBe("Ada L")
+    expect(document.activeElement).toBe(input)
     expect(
       host.querySelector('[data-slot="data-table-filters"]')?.textContent,
     ).toContain("Name")
