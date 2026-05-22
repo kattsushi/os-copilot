@@ -13,12 +13,19 @@ type CloudflareProviderLayer = Layer.Layer<
 const cloudflareProviders =
   Cloudflare.providers as () => CloudflareProviderLayer
 
+const isAlchemyDestroyCommand = () => process.argv.includes("destroy")
+
 function requiredEnv(name: string) {
   const value = process.env[name]
   if (!value) {
     throw new Error(`Missing required environment variable: ${name}`)
   }
   return value
+}
+
+function optionalEnvOnDestroy(name: string) {
+  if (isAlchemyDestroyCommand()) return process.env[name] ?? ""
+  return requiredEnv(name)
 }
 
 export const AuthDb = Cloudflare.D1Database("AuthDb", {
@@ -33,7 +40,8 @@ export const Website = Cloudflare.Vite("Website", {
     AUTH_DB: AuthDb,
   },
   env: {
-    BETTER_AUTH_SECRET: requiredEnv("BETTER_AUTH_SECRET"),
+    // Destroy should not require auth secrets; deploy/preview do.
+    BETTER_AUTH_SECRET: optionalEnvOnDestroy("BETTER_AUTH_SECRET"),
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL ?? "",
   },
 })
