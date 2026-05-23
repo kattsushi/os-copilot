@@ -54,6 +54,8 @@ is shipped by the package.
 **Do NOT adopt `effect-qb` as a runtime/TypeScript dependency in V1.**
 
 - V1 will use **explicit SQL strings** inside infra adapters.
+- We will use **Effect Schema/Model for types only** (decoding/validation), not
+  for generating DDL or migrations in V1.
 - `effect-qb` may be revisited later once its published types are consumable by
   `tsgo` (e.g. `.d.ts` output or fixed sources), or if we use it as a build-time
   codegen tool that does not participate in TS typecheck.
