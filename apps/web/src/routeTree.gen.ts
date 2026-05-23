@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpikeLocalfirstRouteImport } from './routes/spike-localfirst'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const SpikeLocalfirstRoute = SpikeLocalfirstRouteImport.update({
+  id: '/spike-localfirst',
+  path: '/spike-localfirst',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/spike-localfirst': typeof SpikeLocalfirstRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/spike-localfirst': typeof SpikeLocalfirstRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,34 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/spike-localfirst': typeof SpikeLocalfirstRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account' | '/login' | '/register' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/login'
+    | '/register'
+    | '/spike-localfirst'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/login' | '/register' | '/api/auth/$'
-  id: '__root__' | '/' | '/account' | '/login' | '/register' | '/api/auth/$'
+  to:
+    | '/'
+    | '/account'
+    | '/login'
+    | '/register'
+    | '/spike-localfirst'
+    | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/login'
+    | '/register'
+    | '/spike-localfirst'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,11 +104,19 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  SpikeLocalfirstRoute: typeof SpikeLocalfirstRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/solid-router' {
   interface FileRoutesByPath {
+    '/spike-localfirst': {
+      id: '/spike-localfirst'
+      path: '/spike-localfirst'
+      fullPath: '/spike-localfirst'
+      preLoaderRoute: typeof SpikeLocalfirstRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -124,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  SpikeLocalfirstRoute: SpikeLocalfirstRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

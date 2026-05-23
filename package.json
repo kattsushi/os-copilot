@@ -30,6 +30,7 @@
     "@nx/vite": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@typescript/native-preview": "catalog:",
+    "effect-qb": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
     "nx": "catalog:",
@@ -40,7 +41,7 @@
     "ultracite": "7.7.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
+    "*.{js,jsx,ts,tsx,css,scss}": [
       "pnpm exec ultracite fix"
     ]
   },

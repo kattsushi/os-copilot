@@ -46,7 +46,10 @@ minimumReleaseAgeExclude:
 catalog:
   "@effect/language-service": 0.86.1
   "@effect/platform-node": 4.0.0-beta.66
+  "@effect/sql-sqlite-wasm": 4.0.0-beta.66
+  "@effect/wa-sqlite": 0.1.2
   "@effect/tsgo": 0.7.0
+  effect-qb: 4.0.0-beta.66
   "@fontsource-variable/inter": 5.2.8
   "@kobalte/core": 0.13.11
   "@nx/js": 22.7.1
